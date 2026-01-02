@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Analytics } from "@vercel/analytics/react";
 import { Navbar } from "@/components/layout/navbar";
 import { KatanaSearch } from "@/components/katana-search";
@@ -7,12 +7,15 @@ import { ToastProvider } from "@/components/ui/toast";
 import { ThemeProvider } from "@/components/theme-provider";
 import "./globals.css";
 
+export const viewport: Viewport = {
+  themeColor: "#F97316",
+};
+
 export const metadata: Metadata = {
   metadataBase: new URL("https://haruli-kit.vercel.app"),
   title: "Haruli Kit | 個人開發工具庫",
   description: "專為現代開發者打造的個人軍火庫。收集最常用的套件、Hooks 與 UI 元件。",
   manifest: "/manifest.json",
-  themeColor: "#F97316",
   appleWebApp: {
     capable: true,
     statusBarStyle: "black-translucent",

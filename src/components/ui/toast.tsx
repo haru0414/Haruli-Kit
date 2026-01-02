@@ -19,8 +19,11 @@ const ToastContext = createContext<ToastContextType | undefined>(undefined);
 
 export function useToast() {
   const context = useContext(ToastContext);
+  // Return no-op if not within ToastProvider (e.g., during static generation)
   if (!context) {
-    throw new Error("useToast must be used within a ToastProvider");
+    return {
+      showToast: () => {},
+    };
   }
   return context;
 }

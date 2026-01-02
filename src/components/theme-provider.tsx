@@ -14,8 +14,13 @@ const ThemeContext = createContext<ThemeContextType | undefined>(undefined);
 
 export function useTheme() {
   const context = useContext(ThemeContext);
+  // Return default values if not within ThemeProvider (e.g., during static generation)
   if (!context) {
-    throw new Error("useTheme must be used within a ThemeProvider");
+    return {
+      theme: "dark" as const,
+      setTheme: () => {},
+      resolvedTheme: "dark" as const,
+    };
   }
   return context;
 }
