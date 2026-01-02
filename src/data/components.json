@@ -3,36 +3,154 @@
     { "id": "button", "name": "按鈕", "icon": "🔘" },
     { "id": "input", "name": "輸入框", "icon": "📝" },
     { "id": "card", "name": "卡片", "icon": "🃏" },
-    { "id": "layout", "name": "版面", "icon": "📐" },
-    { "id": "feedback", "name": "回饋", "icon": "💬" }
+    { "id": "feedback", "name": "回饋", "icon": "💬" },
+    { "id": "navigation", "name": "導航", "icon": "🧭" },
+    { "id": "display", "name": "展示", "icon": "✨" }
   ],
   "components": [
     {
       "id": "button-primary",
-      "name": "Primary Button",
-      "description": "主要操作按鈕",
+      "name": "Ronin Button",
+      "description": "武士風格按鈕組，包含 Primary、Secondary、Ghost 三種樣式",
       "category": "button",
-      "tags": ["button", "primary", "cta"],
+      "tags": ["button", "primary", "cta", "ronin"],
       "preview": true,
-      "code": "interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {\n  children: React.ReactNode;\n  variant?: 'primary' | 'secondary' | 'ghost';\n  size?: 'sm' | 'md' | 'lg';\n}\n\nexport function Button({\n  children,\n  variant = 'primary',\n  size = 'md',\n  className,\n  ...props\n}: ButtonProps) {\n  const baseStyles = 'inline-flex items-center justify-center rounded-lg font-medium transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2 disabled:opacity-50 disabled:pointer-events-none';\n  \n  const variants = {\n    primary: 'bg-blue-600 text-white hover:bg-blue-700 focus:ring-blue-500',\n    secondary: 'bg-gray-200 text-gray-900 hover:bg-gray-300 focus:ring-gray-500 dark:bg-gray-700 dark:text-gray-100',\n    ghost: 'text-gray-600 hover:bg-gray-100 focus:ring-gray-500 dark:text-gray-300 dark:hover:bg-gray-800',\n  };\n  \n  const sizes = {\n    sm: 'px-3 py-1.5 text-sm',\n    md: 'px-4 py-2 text-base',\n    lg: 'px-6 py-3 text-lg',\n  };\n  \n  return (\n    <button\n      className={`${baseStyles} ${variants[variant]} ${sizes[size]} ${className || ''}`}\n      {...props}\n    >\n      {children}\n    </button>\n  );\n}"
+      "code": "interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {\n  variant?: 'primary' | 'secondary' | 'ghost' | 'danger';\n  size?: 'sm' | 'md' | 'lg';\n  children: React.ReactNode;\n}\n\nexport function Button({ variant = 'primary', size = 'md', children, className, ...props }: ButtonProps) {\n  const base = 'inline-flex items-center justify-center font-bold transition-all cursor-pointer';\n  \n  const variants = {\n    primary: 'bg-orange-400 text-slate-900 shadow-[4px_4px_0px_#FFF] hover:translate-y-0.5 hover:shadow-[2px_2px_0px_#FFF]',\n    secondary: 'bg-slate-700 text-white border border-slate-600 hover:border-orange-400',\n    ghost: 'text-slate-400 hover:text-orange-400',\n    danger: 'bg-red-500 text-white shadow-[4px_4px_0px_#FFF] hover:translate-y-0.5 hover:shadow-[2px_2px_0px_#FFF]',\n  };\n  \n  const sizes = {\n    sm: 'px-3 py-1.5 text-sm',\n    md: 'px-6 py-2 text-base',\n    lg: 'px-8 py-3 text-lg',\n  };\n  \n  return (\n    <button className={`${base} ${variants[variant]} ${sizes[size]} ${className || ''}`} {...props}>\n      {children}\n    </button>\n  );\n}"
+    },
+    {
+      "id": "button-icon",
+      "name": "Icon Button",
+      "description": "圖示按鈕，適合工具列或緊湊空間",
+      "category": "button",
+      "tags": ["button", "icon", "toolbar"],
+      "preview": true,
+      "code": "import { LucideIcon } from 'lucide-react';\n\ninterface IconButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {\n  icon: LucideIcon;\n  variant?: 'default' | 'ghost' | 'danger';\n  size?: 'sm' | 'md' | 'lg';\n}\n\nexport function IconButton({ icon: Icon, variant = 'default', size = 'md', className, ...props }: IconButtonProps) {\n  const variants = {\n    default: 'bg-slate-800 border border-slate-700 text-slate-300 hover:border-orange-400 hover:text-orange-400',\n    ghost: 'text-slate-400 hover:text-orange-400 hover:bg-slate-800',\n    danger: 'bg-slate-800 border border-slate-700 text-red-400 hover:bg-red-500 hover:text-white hover:border-red-500',\n  };\n  \n  const sizes = {\n    sm: 'p-1.5',\n    md: 'p-2',\n    lg: 'p-3',\n  };\n  \n  const iconSizes = { sm: 'w-4 h-4', md: 'w-5 h-5', lg: 'w-6 h-6' };\n  \n  return (\n    <button className={`transition-all cursor-pointer ${variants[variant]} ${sizes[size]} ${className || ''}`} {...props}>\n      <Icon className={iconSizes[size]} />\n    </button>\n  );\n}"
     },
     {
       "id": "input-text",
-      "name": "Text Input",
-      "description": "文字輸入框",
+      "name": "Katana Input",
+      "description": "武士風格輸入框，支援標籤與錯誤狀態",
       "category": "input",
-      "tags": ["input", "text", "form"],
+      "tags": ["input", "text", "form", "katana"],
       "preview": true,
-      "code": "interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {\n  label?: string;\n  error?: string;\n}\n\nexport function Input({ label, error, className, ...props }: InputProps) {\n  return (\n    <div className=\"flex flex-col gap-1.5\">\n      {label && (\n        <label className=\"text-sm font-medium text-gray-700 dark:text-gray-300\">\n          {label}\n        </label>\n      )}\n      <input\n        className={`\n          px-3 py-2 rounded-lg border border-gray-300\n          bg-white text-gray-900\n          placeholder:text-gray-400\n          focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent\n          disabled:bg-gray-100 disabled:cursor-not-allowed\n          dark:bg-gray-800 dark:border-gray-600 dark:text-gray-100\n          ${error ? 'border-red-500 focus:ring-red-500' : ''}\n          ${className || ''}\n        `}\n        {...props}\n      />\n      {error && <span className=\"text-sm text-red-500\">{error}</span>}\n    </div>\n  );\n}"
+      "code": "interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {\n  label?: string;\n  error?: string;\n}\n\nexport function Input({ label, error, className, ...props }: InputProps) {\n  return (\n    <div className=\"flex flex-col gap-1.5\">\n      {label && (\n        <label className=\"text-xs font-mono uppercase text-slate-500\">\n          {label}\n        </label>\n      )}\n      <input\n        className={`\n          w-full bg-slate-800 border-2 text-slate-100\n          px-4 py-3 font-mono\n          placeholder:text-slate-500\n          focus:outline-none focus:border-orange-400 focus:ring-2 focus:ring-orange-400/20\n          transition-all\n          ${error ? 'border-red-500' : 'border-slate-700'}\n          ${className || ''}\n        `}\n        {...props}\n      />\n      {error && <span className=\"text-sm text-red-400 font-mono\">{error}</span>}\n    </div>\n  );\n}"
+    },
+    {
+      "id": "input-search",
+      "name": "Search Input",
+      "description": "搜尋輸入框，包含搜尋圖示與快捷鍵提示",
+      "category": "input",
+      "tags": ["input", "search", "form"],
+      "preview": true,
+      "code": "import { Search } from 'lucide-react';\n\ninterface SearchInputProps extends React.InputHTMLAttributes<HTMLInputElement> {\n  shortcut?: string;\n}\n\nexport function SearchInput({ shortcut, className, ...props }: SearchInputProps) {\n  return (\n    <div className=\"relative\">\n      <Search className=\"absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-500\" />\n      <input\n        type=\"text\"\n        className={`\n          w-full bg-slate-800 border-2 border-slate-700 text-slate-100\n          pl-12 pr-16 py-3 font-mono\n          placeholder:text-slate-500\n          focus:outline-none focus:border-orange-400\n          transition-all\n          ${className || ''}\n        `}\n        {...props}\n      />\n      {shortcut && (\n        <kbd className=\"absolute right-4 top-1/2 -translate-y-1/2 px-2 py-1 bg-slate-700 text-slate-400 text-xs font-mono rounded\">\n          {shortcut}\n        </kbd>\n      )}\n    </div>\n  );\n}"
+    },
+    {
+      "id": "input-textarea",
+      "name": "Textarea",
+      "description": "多行文字輸入框",
+      "category": "input",
+      "tags": ["input", "textarea", "form"],
+      "preview": true,
+      "code": "interface TextareaProps extends React.TextareaHTMLAttributes<HTMLTextAreaElement> {\n  label?: string;\n  error?: string;\n}\n\nexport function Textarea({ label, error, className, ...props }: TextareaProps) {\n  return (\n    <div className=\"flex flex-col gap-1.5\">\n      {label && (\n        <label className=\"text-xs font-mono uppercase text-slate-500\">{label}</label>\n      )}\n      <textarea\n        className={`\n          w-full bg-slate-800 border-2 text-slate-100\n          px-4 py-3 font-mono min-h-[120px] resize-y\n          placeholder:text-slate-500\n          focus:outline-none focus:border-orange-400 focus:ring-2 focus:ring-orange-400/20\n          transition-all\n          ${error ? 'border-red-500' : 'border-slate-700'}\n          ${className || ''}\n        `}\n        {...props}\n      />\n      {error && <span className=\"text-sm text-red-400 font-mono\">{error}</span>}\n    </div>\n  );\n}"
     },
     {
       "id": "card-basic",
-      "name": "Basic Card",
-      "description": "基礎卡片元件",
+      "name": "Ronin Card",
+      "description": "武士風格卡片，帶有切角效果",
       "category": "card",
-      "tags": ["card", "container", "layout"],
+      "tags": ["card", "container", "cut-corners"],
       "preview": true,
-      "code": "interface CardProps {\n  children: React.ReactNode;\n  className?: string;\n}\n\nexport function Card({ children, className }: CardProps) {\n  return (\n    <div\n      className={`\n        rounded-xl border border-gray-200 bg-white p-6\n        shadow-sm transition-shadow hover:shadow-md\n        dark:border-gray-700 dark:bg-gray-800\n        ${className || ''}\n      `}\n    >\n      {children}\n    </div>\n  );\n}\n\nexport function CardHeader({ children, className }: CardProps) {\n  return (\n    <div className={`mb-4 ${className || ''}`}>\n      {children}\n    </div>\n  );\n}\n\nexport function CardTitle({ children, className }: CardProps) {\n  return (\n    <h3 className={`text-lg font-semibold text-gray-900 dark:text-gray-100 ${className || ''}`}>\n      {children}\n    </h3>\n  );\n}\n\nexport function CardContent({ children, className }: CardProps) {\n  return (\n    <div className={`text-gray-600 dark:text-gray-300 ${className || ''}`}>\n      {children}\n    </div>\n  );\n}"
+      "code": "interface CardProps {\n  children: React.ReactNode;\n  className?: string;\n  hover?: boolean;\n}\n\nexport function Card({ children, className, hover = true }: CardProps) {\n  return (\n    <div\n      className={`\n        bg-slate-800/50 backdrop-blur border border-slate-700 p-6\n        cut-corners\n        ${hover ? 'hover:border-orange-400 transition-colors' : ''}\n        ${className || ''}\n      `}\n    >\n      {children}\n    </div>\n  );\n}\n\nexport function CardTitle({ children }: { children: React.ReactNode }) {\n  return <h3 className=\"font-bold text-lg mb-2\">{children}</h3>;\n}\n\nexport function CardDescription({ children }: { children: React.ReactNode }) {\n  return <p className=\"text-sm text-slate-400\">{children}</p>;\n}"
+    },
+    {
+      "id": "card-feature",
+      "name": "Feature Card",
+      "description": "功能展示卡片，帶有圖示與標題",
+      "category": "card",
+      "tags": ["card", "feature", "icon"],
+      "preview": true,
+      "code": "import { LucideIcon } from 'lucide-react';\n\ninterface FeatureCardProps {\n  icon: LucideIcon;\n  title: string;\n  description: string;\n}\n\nexport function FeatureCard({ icon: Icon, title, description }: FeatureCardProps) {\n  return (\n    <div className=\"bg-slate-800/50 border border-slate-700 p-6 cut-corners group hover:border-orange-400 transition-colors\">\n      <div className=\"w-12 h-12 bg-slate-700/50 flex items-center justify-center mb-4 group-hover:bg-orange-400/20 transition-colors\">\n        <Icon className=\"w-6 h-6 text-orange-400\" />\n      </div>\n      <h3 className=\"font-bold text-lg mb-2 group-hover:text-orange-400 transition-colors\">\n        {title}\n      </h3>\n      <p className=\"text-sm text-slate-400\">{description}</p>\n    </div>\n  );\n}"
+    },
+    {
+      "id": "badge",
+      "name": "Badge",
+      "description": "標籤徽章，多種顏色變體",
+      "category": "display",
+      "tags": ["badge", "tag", "label"],
+      "preview": true,
+      "code": "interface BadgeProps {\n  children: React.ReactNode;\n  variant?: 'default' | 'primary' | 'success' | 'warning' | 'danger';\n}\n\nexport function Badge({ children, variant = 'default' }: BadgeProps) {\n  const variants = {\n    default: 'bg-slate-700 text-slate-300',\n    primary: 'bg-orange-400/20 text-orange-400 border border-orange-400/30',\n    success: 'bg-green-400/20 text-green-400 border border-green-400/30',\n    warning: 'bg-yellow-400/20 text-yellow-400 border border-yellow-400/30',\n    danger: 'bg-red-400/20 text-red-400 border border-red-400/30',\n  };\n\n  return (\n    <span className={`px-2 py-0.5 text-xs font-mono ${variants[variant]}`}>\n      {children}\n    </span>\n  );\n}"
+    },
+    {
+      "id": "avatar",
+      "name": "Avatar",
+      "description": "使用者頭像元件",
+      "category": "display",
+      "tags": ["avatar", "user", "profile"],
+      "preview": true,
+      "code": "interface AvatarProps {\n  src?: string;\n  alt?: string;\n  fallback?: string;\n  size?: 'sm' | 'md' | 'lg';\n}\n\nexport function Avatar({ src, alt, fallback, size = 'md' }: AvatarProps) {\n  const sizes = {\n    sm: 'w-8 h-8 text-xs',\n    md: 'w-10 h-10 text-sm',\n    lg: 'w-14 h-14 text-base',\n  };\n\n  if (src) {\n    return (\n      <img\n        src={src}\n        alt={alt || ''}\n        className={`${sizes[size]} rounded-full object-cover border-2 border-slate-700`}\n      />\n    );\n  }\n\n  return (\n    <div className={`${sizes[size]} rounded-full bg-slate-700 border-2 border-slate-600 flex items-center justify-center font-bold text-orange-400`}>\n      {fallback || '?'}\n    </div>\n  );\n}"
+    },
+    {
+      "id": "alert",
+      "name": "Alert",
+      "description": "警示訊息元件，支援多種類型",
+      "category": "feedback",
+      "tags": ["alert", "message", "notification"],
+      "preview": true,
+      "code": "import { AlertCircle, CheckCircle, Info, XCircle } from 'lucide-react';\n\ninterface AlertProps {\n  type?: 'info' | 'success' | 'warning' | 'error';\n  title?: string;\n  children: React.ReactNode;\n}\n\nexport function Alert({ type = 'info', title, children }: AlertProps) {\n  const config = {\n    info: { icon: Info, bg: 'bg-cyan-400/10', border: 'border-cyan-400/30', text: 'text-cyan-400' },\n    success: { icon: CheckCircle, bg: 'bg-green-400/10', border: 'border-green-400/30', text: 'text-green-400' },\n    warning: { icon: AlertCircle, bg: 'bg-yellow-400/10', border: 'border-yellow-400/30', text: 'text-yellow-400' },\n    error: { icon: XCircle, bg: 'bg-red-400/10', border: 'border-red-400/30', text: 'text-red-400' },\n  };\n\n  const { icon: Icon, bg, border, text } = config[type];\n\n  return (\n    <div className={`${bg} ${border} border p-4 flex gap-3`}>\n      <Icon className={`w-5 h-5 ${text} shrink-0 mt-0.5`} />\n      <div>\n        {title && <h4 className={`font-bold ${text} mb-1`}>{title}</h4>}\n        <p className=\"text-sm text-slate-300\">{children}</p>\n      </div>\n    </div>\n  );\n}"
+    },
+    {
+      "id": "toast",
+      "name": "Toast",
+      "description": "輕量級通知提示",
+      "category": "feedback",
+      "tags": ["toast", "notification", "popup"],
+      "preview": true,
+      "code": "import { X, CheckCircle, AlertCircle, Info } from 'lucide-react';\n\ninterface ToastProps {\n  type?: 'success' | 'error' | 'info';\n  message: string;\n  onClose?: () => void;\n}\n\nexport function Toast({ type = 'info', message, onClose }: ToastProps) {\n  const icons = {\n    success: <CheckCircle className=\"w-5 h-5 text-green-400\" />,\n    error: <AlertCircle className=\"w-5 h-5 text-red-400\" />,\n    info: <Info className=\"w-5 h-5 text-cyan-400\" />,\n  };\n\n  return (\n    <div className=\"bg-slate-800 border border-slate-700 shadow-lg px-4 py-3 flex items-center gap-3 min-w-[300px]\">\n      {icons[type]}\n      <span className=\"flex-1 text-sm\">{message}</span>\n      {onClose && (\n        <button onClick={onClose} className=\"text-slate-400 hover:text-white cursor-pointer\">\n          <X className=\"w-4 h-4\" />\n        </button>\n      )}\n    </div>\n  );\n}"
+    },
+    {
+      "id": "tabs",
+      "name": "Tabs",
+      "description": "分頁標籤切換元件",
+      "category": "navigation",
+      "tags": ["tabs", "navigation", "switch"],
+      "preview": true,
+      "code": "import { useState } from 'react';\n\ninterface Tab {\n  id: string;\n  label: string;\n  content: React.ReactNode;\n}\n\ninterface TabsProps {\n  tabs: Tab[];\n  defaultTab?: string;\n}\n\nexport function Tabs({ tabs, defaultTab }: TabsProps) {\n  const [active, setActive] = useState(defaultTab || tabs[0]?.id);\n\n  return (\n    <div>\n      <div className=\"flex gap-2 border-b border-slate-700 pb-2 mb-4\">\n        {tabs.map((tab) => (\n          <button\n            key={tab.id}\n            onClick={() => setActive(tab.id)}\n            className={`px-4 py-2 font-mono text-sm transition-all cursor-pointer ${\n              active === tab.id\n                ? 'bg-orange-400 text-slate-900'\n                : 'text-slate-400 hover:text-orange-400'\n            }`}\n          >\n            {tab.label}\n          </button>\n        ))}\n      </div>\n      <div>\n        {tabs.find((tab) => tab.id === active)?.content}\n      </div>\n    </div>\n  );\n}"
+    },
+    {
+      "id": "breadcrumb",
+      "name": "Breadcrumb",
+      "description": "麵包屑導航元件",
+      "category": "navigation",
+      "tags": ["breadcrumb", "navigation", "path"],
+      "preview": true,
+      "code": "import { ChevronRight } from 'lucide-react';\n\ninterface BreadcrumbItem {\n  label: string;\n  href?: string;\n}\n\ninterface BreadcrumbProps {\n  items: BreadcrumbItem[];\n}\n\nexport function Breadcrumb({ items }: BreadcrumbProps) {\n  return (\n    <nav className=\"flex items-center gap-2 text-sm font-mono\">\n      {items.map((item, index) => (\n        <div key={index} className=\"flex items-center gap-2\">\n          {index > 0 && <ChevronRight className=\"w-4 h-4 text-slate-600\" />}\n          {item.href ? (\n            <a href={item.href} className=\"text-slate-400 hover:text-orange-400 transition-colors\">\n              {item.label}\n            </a>\n          ) : (\n            <span className=\"text-orange-400\">{item.label}</span>\n          )}\n        </div>\n      ))}\n    </nav>\n  );\n}"
+    },
+    {
+      "id": "progress",
+      "name": "Progress Bar",
+      "description": "進度條元件",
+      "category": "display",
+      "tags": ["progress", "loading", "bar"],
+      "preview": true,
+      "code": "interface ProgressProps {\n  value: number;\n  max?: number;\n  showLabel?: boolean;\n  variant?: 'default' | 'success' | 'warning' | 'danger';\n}\n\nexport function Progress({ value, max = 100, showLabel = false, variant = 'default' }: ProgressProps) {\n  const percentage = Math.min(100, Math.max(0, (value / max) * 100));\n  \n  const variants = {\n    default: 'bg-orange-400',\n    success: 'bg-green-400',\n    warning: 'bg-yellow-400',\n    danger: 'bg-red-400',\n  };\n\n  return (\n    <div className=\"w-full\">\n      {showLabel && (\n        <div className=\"flex justify-between mb-2 text-sm font-mono\">\n          <span className=\"text-slate-400\">Progress</span>\n          <span className=\"text-orange-400\">{Math.round(percentage)}%</span>\n        </div>\n      )}\n      <div className=\"h-2 bg-slate-700 overflow-hidden\">\n        <div\n          className={`h-full ${variants[variant]} transition-all duration-300`}\n          style={{ width: `${percentage}%` }}\n        />\n      </div>\n    </div>\n  );\n}"
+    },
+    {
+      "id": "skeleton",
+      "name": "Skeleton",
+      "description": "載入骨架屏元件",
+      "category": "feedback",
+      "tags": ["skeleton", "loading", "placeholder"],
+      "preview": true,
+      "code": "interface SkeletonProps {\n  className?: string;\n  variant?: 'text' | 'circular' | 'rectangular';\n}\n\nexport function Skeleton({ className, variant = 'text' }: SkeletonProps) {\n  const base = 'bg-slate-700 animate-pulse';\n  \n  const variants = {\n    text: 'h-4 rounded',\n    circular: 'rounded-full',\n    rectangular: 'rounded',\n  };\n\n  return <div className={`${base} ${variants[variant]} ${className || ''}`} />;\n}\n\n// Usage example:\n// <Skeleton className=\"w-full h-4\" />\n// <Skeleton variant=\"circular\" className=\"w-10 h-10\" />\n// <Skeleton variant=\"rectangular\" className=\"w-full h-32\" />"
+    },
+    {
+      "id": "tooltip",
+      "name": "Tooltip",
+      "description": "提示氣泡元件",
+      "category": "display",
+      "tags": ["tooltip", "hover", "info"],
+      "preview": true,
+      "code": "import { useState } from 'react';\n\ninterface TooltipProps {\n  content: string;\n  children: React.ReactNode;\n  position?: 'top' | 'bottom' | 'left' | 'right';\n}\n\nexport function Tooltip({ content, children, position = 'top' }: TooltipProps) {\n  const [show, setShow] = useState(false);\n\n  const positions = {\n    top: 'bottom-full left-1/2 -translate-x-1/2 mb-2',\n    bottom: 'top-full left-1/2 -translate-x-1/2 mt-2',\n    left: 'right-full top-1/2 -translate-y-1/2 mr-2',\n    right: 'left-full top-1/2 -translate-y-1/2 ml-2',\n  };\n\n  return (\n    <div\n      className=\"relative inline-block\"\n      onMouseEnter={() => setShow(true)}\n      onMouseLeave={() => setShow(false)}\n    >\n      {children}\n      {show && (\n        <div className={`absolute ${positions[position]} z-50 px-3 py-1.5 bg-slate-900 border border-slate-700 text-sm text-slate-300 whitespace-nowrap`}>\n          {content}\n        </div>\n      )}\n    </div>\n  );\n}"
     }
   ]
 }
