@@ -8,6 +8,7 @@ const navItems = [
   { href: "/packages", label: "// ARSENAL" },
   { href: "/snippets", label: "// SCROLLS" },
   { href: "/components", label: "// DOJO" },
+  { href: "/vibe", label: "// VIBE" },
   { href: "/sensei", label: "// SENSEI" },
   { href: "/docs", label: "// DOCS" },
 ];

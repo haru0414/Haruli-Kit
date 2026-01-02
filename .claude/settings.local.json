@@ -6,7 +6,15 @@
       "Bash(uipro init:*)",
       "Bash(python3:*)",
       "Bash(npm run build:*)",
-      "Bash(ls:*)"
+      "Bash(ls:*)",
+      "Bash(git push:*)",
+      "Bash(npm run dev:*)",
+      "Bash(npm link)",
+      "Bash(haruli --help:*)",
+      "Bash(haruli list:*)",
+      "Bash(git add:*)",
+      "Bash(git reset:*)",
+      "Bash(git commit:*)"
     ]
   }
 }
