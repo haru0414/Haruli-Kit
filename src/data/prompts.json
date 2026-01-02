@@ -1,0 +1,128 @@
+{
+  "categories": [
+    { "id": "ui-design", "name": "UI/UX 設計", "icon": "Palette" },
+    { "id": "principles", "name": "設計原則", "icon": "BookOpen" },
+    { "id": "coding", "name": "程式開發", "icon": "Code2" },
+    { "id": "system", "name": "系統提示", "icon": "Settings" },
+    { "id": "npm-tools", "name": "NPM 工具", "icon": "Package" }
+  ],
+  "prompts": [
+    {
+      "id": "ronin-ui-system",
+      "title": "Ronin UI 設計系統",
+      "description": "武士風格 UI 設計系統的完整規格說明，包含配色、字體、元件風格",
+      "category": "ui-design",
+      "tags": ["tailwind", "design-system", "samurai", "dark-mode"],
+      "language": "markdown",
+      "content": "你是世界頂級的 UI/UX 設計師。請根據以下規格，為「個人開發工具庫（Personal Developer Toolkit）」網站設計一套極具風格的 UI 系統。目標是將參考圖中「現代武士與向量插畫」的氛圍轉化為一個精準、高效且視覺強烈的程式碼管理平台。\n\n**1. 整體氛圍 (The Vibe)**\n「賽璐珞向量美學遇見代碼紀律」——一種銳利、高對比度、帶有東方史詩感的現代開發者儀表板，將武士的專注與程式碼的精確性結合。\n\n**2. 顏色調色盤 (Color Palette)**\n從參考圖中提取的高對比配色，對應 Tailwind CSS：\n\n- **Background (夜幕深藍)**: `#0F172A` (Slate-900) - 用於主背景\n- **Surface (武士服青)**: `#1E293B` (Slate-800) 搭配 `#334155` (Slate-700) - 用於卡片與側邊欄\n- **Primary Accent (落日橘)**: `#FB923C` (Orange-400) to `#F97316` (Orange-500) - 用於 CTA 按鈕與強調文字\n- **Secondary Accent (刀光藍)**: `#38BDF8` (Sky-400) 用於程式碼高亮\n- **Text**: `#F8FAFC` (Slate-50) 為主標題，`#94A3B8` (Slate-400) 為副標題\n\n**3. 字體排印 (Typography)**\n- **Headings**: 使用 **'Space Grotesk'**，粗體 (Bold 700)，字距微寬 (tracking-wide)\n- **Body/Code**: 使用 **'JetBrains Mono'**，Line-height 設置為 `leading-relaxed`\n\n**4. UI 元素 (The Atoms)**\n- **Buttons**: 完全不圓角或極小圓角，帶有「硬邊陰影」`box-shadow: 4px 4px 0px #F97316`\n- **Cards**: 使用「玻璃擬態」但帶有硬邊框，並帶有 `clip-path` 切角設計（刀切效果）\n- **Inputs**: 背景深色，Focus 時顯示亮橘色光暈環"
+    },
+    {
+      "id": "uipro-npm-tool",
+      "title": "UI Pro NPM 工具",
+      "description": "npx uipro - 自動搜尋設計風格、配色、字體配對的 CLI 工具",
+      "category": "npm-tools",
+      "tags": ["npm", "cli", "ui-ux", "design"],
+      "language": "bash",
+      "content": "# UI Pro - Design Intelligence CLI\n# npm 套件：自動搜尋設計風格、配色、字體配對\n\n# 安裝\nnpm install -g uipro\n# 或使用 npx\nnpx uipro\n\n# 基本使用\nuipro --help\n\n# 搜尋產品類型推薦\nuipro search \"SaaS dashboard\" --domain product\n\n# 搜尋設計風格\nuipro search \"glassmorphism minimal\" --domain style\n\n# 搜尋字體配對\nuipro search \"elegant modern\" --domain typography\n\n# 搜尋配色方案\nuipro search \"fintech professional\" --domain color\n\n# 搜尋 Landing Page 結構\nuipro search \"hero-centric\" --domain landing\n\n# 搜尋圖表類型\nuipro search \"dashboard analytics\" --domain chart\n\n# 搜尋 UX 最佳實踐\nuipro search \"accessibility animation\" --domain ux\n\n# 可用 Domains\n# - product: 產品類型推薦 (SaaS, e-commerce, portfolio...)\n# - style: UI 風格 (glassmorphism, brutalism, minimal...)\n# - typography: 字體配對 (elegant, playful, professional...)\n# - color: 配色方案 (按產業分類)\n# - landing: 頁面結構\n# - chart: 圖表類型\n# - ux: 最佳實踐與反模式"
+    },
+    {
+      "id": "solid-principles",
+      "title": "SOLID 設計原則",
+      "description": "物件導向程式設計的五大核心原則",
+      "category": "principles",
+      "tags": ["solid", "oop", "design-patterns", "clean-code"],
+      "language": "markdown",
+      "content": "# SOLID 設計原則\n\n請在開發時遵循 SOLID 原則，確保程式碼的可維護性、可擴展性和可測試性。\n\n## S - 單一職責原則 (Single Responsibility Principle)\n**一個類別應該只有一個改變的理由。**\n\n```typescript\n// Bad: 一個類別做太多事\nclass UserService {\n  createUser() { /* ... */ }\n  sendEmail() { /* ... */ }  // 應該分離\n  generateReport() { /* ... */ }  // 應該分離\n}\n\n// Good: 職責分離\nclass UserService {\n  createUser() { /* ... */ }\n}\nclass EmailService {\n  sendEmail() { /* ... */ }\n}\nclass ReportService {\n  generateReport() { /* ... */ }\n}\n```\n\n## O - 開放封閉原則 (Open/Closed Principle)\n**對擴展開放，對修改封閉。**\n\n```typescript\n// Good: 透過介面擴展，不修改原有程式碼\ninterface PaymentProcessor {\n  process(amount: number): void;\n}\n\nclass CreditCardProcessor implements PaymentProcessor {\n  process(amount: number) { /* ... */ }\n}\n\nclass PayPalProcessor implements PaymentProcessor {\n  process(amount: number) { /* ... */ }\n}\n```\n\n## L - 里氏替換原則 (Liskov Substitution Principle)\n**子類別必須能夠替換其父類別。**\n\n## I - 介面隔離原則 (Interface Segregation Principle)\n**不應該強迫客戶端依賴它不使用的介面。**\n\n```typescript\n// Bad: 太大的介面\ninterface Worker {\n  work(): void;\n  eat(): void;  // Robot 不需要 eat\n}\n\n// Good: 分離的介面\ninterface Workable {\n  work(): void;\n}\ninterface Eatable {\n  eat(): void;\n}\n```\n\n## D - 依賴反轉原則 (Dependency Inversion Principle)\n**高層模組不應依賴低層模組，兩者都應依賴抽象。**\n\n```typescript\n// Good: 依賴抽象而非具體實作\ninterface Database {\n  save(data: any): void;\n}\n\nclass UserRepository {\n  constructor(private db: Database) {}  // 依賴介面\n}\n```"
+    },
+    {
+      "id": "high-cohesion-low-coupling",
+      "title": "高內聚低耦合原則",
+      "description": "軟體設計的核心原則：模組內部緊密相關，模組之間鬆散連結",
+      "category": "principles",
+      "tags": ["cohesion", "coupling", "architecture", "modularity"],
+      "language": "markdown",
+      "content": "# 高內聚低耦合 (High Cohesion, Low Coupling)\n\n這是軟體設計最重要的原則之一。請在開發時確保：\n\n## 高內聚 (High Cohesion)\n**一個模組內的元素應該緊密相關，共同完成單一明確的任務。**\n\n### 內聚類型（由低到高）\n1. **偶然內聚**: 模組內元素無關聯（最差）\n2. **邏輯內聚**: 執行類似功能但本質不同\n3. **時間內聚**: 同時執行的功能\n4. **程序內聚**: 按順序執行的功能\n5. **通訊內聚**: 操作相同資料\n6. **順序內聚**: 一個功能的輸出是另一個的輸入\n7. **功能內聚**: 只做一件事（最佳）\n\n```typescript\n// Bad: 低內聚 - 做太多不相關的事\nclass Utils {\n  formatDate() { /* ... */ }\n  calculateTax() { /* ... */ }  // 不相關\n  sendEmail() { /* ... */ }     // 不相關\n}\n\n// Good: 高內聚 - 專注於單一領域\nclass DateFormatter {\n  format() { /* ... */ }\n  parse() { /* ... */ }\n  diff() { /* ... */ }\n}\n```\n\n## 低耦合 (Low Coupling)\n**模組之間的依賴應該最小化。**\n\n### 耦合類型（由高到低）\n1. **內容耦合**: 直接存取另一模組內部（最差）\n2. **共用耦合**: 共用全域變數\n3. **控制耦合**: 傳遞控制旗標\n4. **標記耦合**: 傳遞資料結構但只用部分\n5. **資料耦合**: 只傳遞必要的資料（最佳）\n\n```typescript\n// Bad: 高耦合 - 直接依賴具體實作\nclass OrderService {\n  private emailService = new EmailService();  // 緊耦合\n  \n  createOrder() {\n    this.emailService.send();  // 難以測試、難以替換\n  }\n}\n\n// Good: 低耦合 - 依賴注入\nclass OrderService {\n  constructor(private notifier: Notifier) {}  // 依賴介面\n  \n  createOrder() {\n    this.notifier.notify();  // 易於測試、易於替換\n  }\n}\n```\n\n## 實踐指南\n\n### 1. 模組劃分\n- 按功能領域劃分（用戶、訂單、支付）\n- 而非按技術層次（controllers、services、models）\n\n### 2. 介面設計\n- 定義清晰的公開 API\n- 隱藏內部實作細節\n- 使用依賴注入\n\n### 3. 檢查指標\n- 改動一個模組是否需要改動其他模組？\n- 能否獨立測試每個模組？\n- 能否輕易替換實作？"
+    },
+    {
+      "id": "clean-code-principles",
+      "title": "Clean Code 原則",
+      "description": "撰寫乾淨、可讀、可維護程式碼的核心原則",
+      "category": "principles",
+      "tags": ["clean-code", "readability", "maintainability", "best-practices"],
+      "language": "markdown",
+      "content": "# Clean Code 原則\n\n請遵循以下原則撰寫乾淨的程式碼：\n\n## 1. 有意義的命名\n\n```typescript\n// Bad\nconst d = 86400;  // 什麼是 d?\nconst list = users.filter(u => u.a > 18);  // u.a 是什麼?\n\n// Good\nconst SECONDS_PER_DAY = 86400;\nconst adultUsers = users.filter(user => user.age > 18);\n```\n\n## 2. 函式應該小而專注\n\n```typescript\n// Bad: 函式做太多事\nfunction processUser(user) {\n  // 驗證\n  // 格式化\n  // 儲存\n  // 發送通知\n  // 記錄日誌\n}\n\n// Good: 每個函式只做一件事\nfunction validateUser(user) { /* ... */ }\nfunction formatUser(user) { /* ... */ }\nfunction saveUser(user) { /* ... */ }\nfunction notifyUser(user) { /* ... */ }\n```\n\n## 3. 避免副作用\n\n```typescript\n// Bad: 隱藏的副作用\nfunction getUser(id) {\n  const user = db.find(id);\n  user.lastAccess = new Date();  // 副作用：修改了物件\n  return user;\n}\n\n// Good: 明確的行為\nfunction getUser(id) {\n  return db.find(id);\n}\nfunction updateLastAccess(user) {\n  return { ...user, lastAccess: new Date() };\n}\n```\n\n## 4. DRY (Don't Repeat Yourself)\n\n```typescript\n// Bad: 重複的邏輯\nfunction validateEmail(email) {\n  const regex = /^[^@]+@[^@]+\\.[^@]+$/;\n  return regex.test(email);\n}\nfunction isValidEmail(email) {\n  const pattern = /^[^@]+@[^@]+\\.[^@]+$/;\n  return pattern.test(email);\n}\n\n// Good: 單一來源\nconst EMAIL_REGEX = /^[^@]+@[^@]+\\.[^@]+$/;\nfunction validateEmail(email) {\n  return EMAIL_REGEX.test(email);\n}\n```\n\n## 5. 早期返回 (Early Return)\n\n```typescript\n// Bad: 巢狀條件\nfunction processOrder(order) {\n  if (order) {\n    if (order.items.length > 0) {\n      if (order.isPaid) {\n        // 處理訂單...\n      }\n    }\n  }\n}\n\n// Good: 早期返回\nfunction processOrder(order) {\n  if (!order) return;\n  if (order.items.length === 0) return;\n  if (!order.isPaid) return;\n  \n  // 處理訂單...\n}\n```\n\n## 6. 使用具描述性的錯誤訊息\n\n```typescript\n// Bad\nthrow new Error('Invalid');\n\n// Good\nthrow new Error(`Invalid email format: ${email}. Expected format: user@domain.com`);\n```\n\n## 7. 註解應該解釋「為什麼」而非「做什麼」\n\n```typescript\n// Bad: 解釋做什麼（程式碼已經說明了）\n// 將 x 加 1\nx = x + 1;\n\n// Good: 解釋為什麼\n// 補償時區偏移（伺服器使用 UTC）\nx = x + 1;\n```"
+    },
+    {
+      "id": "dry-kiss-yagni",
+      "title": "DRY, KISS, YAGNI 原則",
+      "description": "軟體開發的三大簡約原則",
+      "category": "principles",
+      "tags": ["dry", "kiss", "yagni", "simplicity"],
+      "language": "markdown",
+      "content": "# DRY, KISS, YAGNI 原則\n\n## DRY - Don't Repeat Yourself\n**不要重複自己：每個知識點在系統中應該只有一個明確的表示。**\n\n### 應用場景\n- 重複的程式碼 → 抽取函式/類別\n- 重複的配置 → 使用變數/常數\n- 重複的邏輯 → 建立共用模組\n\n```typescript\n// Bad: 重複的驗證邏輯\nfunction createUser(data) {\n  if (!data.email || !data.email.includes('@')) throw new Error('Invalid email');\n}\nfunction updateUser(data) {\n  if (!data.email || !data.email.includes('@')) throw new Error('Invalid email');\n}\n\n// Good: 抽取共用函式\nfunction validateEmail(email: string) {\n  if (!email || !email.includes('@')) throw new Error('Invalid email');\n}\n```\n\n### 注意：避免過度 DRY\n- 如果兩段程式碼只是「看起來」相似但代表不同概念，不應該合併\n- 過度抽象可能導致難以理解和維護\n\n---\n\n## KISS - Keep It Simple, Stupid\n**保持簡單：最簡單的解決方案通常是最好的。**\n\n### 實踐指南\n1. 不要過度設計\n2. 使用最直接的解決方案\n3. 避免不必要的抽象層\n4. 程式碼應該一目了然\n\n```typescript\n// Bad: 過度複雜\nclass UserFactory {\n  private static instance: UserFactory;\n  static getInstance() { /* ... */ }\n  createUser(builder: UserBuilder) {\n    return builder.setDefaults().validate().build();\n  }\n}\n\n// Good: 簡單直接\nfunction createUser(data: UserData): User {\n  return { ...defaultUser, ...data };\n}\n```\n\n---\n\n## YAGNI - You Aren't Gonna Need It\n**你不會需要它：不要為假設的未來需求寫程式碼。**\n\n### 常見錯誤\n- 「以後可能需要支援多種資料庫」→ 現在只用一種\n- 「以後可能需要國際化」→ 現在只有一種語言\n- 「以後可能需要多租戶」→ 現在只有一個租戶\n\n```typescript\n// Bad: YAGNI 違反 - 為未來需求過度設計\ninterface StorageAdapter {\n  save(data: any): void;\n  load(id: string): any;\n}\nclass LocalStorageAdapter implements StorageAdapter { /* ... */ }\nclass S3StorageAdapter implements StorageAdapter { /* ... */ }  // 目前根本不用\nclass AzureBlobAdapter implements StorageAdapter { /* ... */ }  // 目前根本不用\n\n// Good: 只實作目前需要的\nfunction saveToLocalStorage(key: string, data: any) {\n  localStorage.setItem(key, JSON.stringify(data));\n}\n```\n\n### 權衡\n- 不是說不考慮未來，而是不要提前實作\n- 設計應該允許未來擴展，但不提前實作\n- 當真的需要時再重構"
+    },
+    {
+      "id": "composition-over-inheritance",
+      "title": "組合優於繼承原則",
+      "description": "優先使用物件組合而非類別繼承來實現程式碼重用",
+      "category": "principles",
+      "tags": ["composition", "inheritance", "oop", "design-patterns"],
+      "language": "markdown",
+      "content": "# 組合優於繼承 (Composition over Inheritance)\n\n**優先使用組合來擴展功能，而非繼承。**\n\n## 為什麼繼承可能有問題？\n\n1. **緊耦合**: 子類別與父類別緊密綁定\n2. **脆弱基類**: 父類別的改變可能破壞子類別\n3. **多重繼承問題**: 大多數語言不支援\n4. **靈活性差**: 繼承關係在編譯時確定\n\n```typescript\n// Bad: 繼承導致的問題\nclass Animal {\n  move() { console.log('Moving...'); }\n}\n\nclass Bird extends Animal {\n  move() { console.log('Flying...'); }\n}\n\nclass Penguin extends Bird {\n  // 問題：企鵝不會飛！\n  // 繼承了錯誤的行為\n}\n```\n\n## 組合的解決方案\n\n```typescript\n// Good: 使用組合\ninterface MoveBehavior {\n  move(): void;\n}\n\nconst flyBehavior: MoveBehavior = {\n  move: () => console.log('Flying...')\n};\n\nconst walkBehavior: MoveBehavior = {\n  move: () => console.log('Walking...')\n};\n\nconst swimBehavior: MoveBehavior = {\n  move: () => console.log('Swimming...')\n};\n\nclass Animal {\n  constructor(private moveBehavior: MoveBehavior) {}\n  \n  move() {\n    this.moveBehavior.move();\n  }\n}\n\nconst eagle = new Animal(flyBehavior);\nconst penguin = new Animal(swimBehavior);  // 正確！\n```\n\n## React 中的組合\n\n```tsx\n// Bad: 繼承式思維\nclass SpecialButton extends Button {\n  render() {\n    return <button className=\"special\">{this.props.children}</button>;\n  }\n}\n\n// Good: 組合式思維\nfunction Button({ variant, children, ...props }) {\n  return (\n    <button className={cn('btn', variant)} {...props}>\n      {children}\n    </button>\n  );\n}\n\n// 使用\n<Button variant=\"special\">Click me</Button>\n```\n\n## 何時使用繼承？\n\n繼承在以下情況仍然適用：\n- 真正的「is-a」關係（狗是動物）\n- 需要利用多型的場景\n- 框架要求（如 React Class Components）\n\n## 實踐建議\n\n1. 預設使用組合\n2. 只在明確的「is-a」關係時考慮繼承\n3. 繼承層次不超過 2-3 層\n4. 使用介面定義行為契約"
+    },
+    {
+      "id": "code-review-prompt",
+      "title": "Code Review 提示詞",
+      "description": "專業程式碼審查的系統提示詞",
+      "category": "coding",
+      "tags": ["code-review", "best-practices", "typescript"],
+      "language": "markdown",
+      "content": "你是一位資深軟體工程師，專門進行程式碼審查。請按照以下標準審查程式碼：\n\n## 審查重點\n\n### 1. 程式碼品質\n- 命名是否清晰且具描述性\n- 函式是否遵循單一職責原則\n- 是否有重複的程式碼\n- 錯誤處理是否完善\n\n### 2. 效能考量\n- 是否有不必要的重新渲染\n- 資料結構是否適當\n- API 呼叫是否最佳化\n\n### 3. 安全性\n- 是否有 XSS 風險\n- 是否有 SQL Injection 風險\n- 敏感資料處理是否安全\n\n### 4. 可維護性\n- 程式碼是否容易理解\n- 是否有適當的註解\n- 測試覆蓋率是否足夠\n\n請提供具體的改進建議，並附上修改後的程式碼範例。"
+    },
+    {
+      "id": "react-component-prompt",
+      "title": "React 元件開發提示詞",
+      "description": "建立 React 元件的最佳實踐提示詞",
+      "category": "coding",
+      "tags": ["react", "typescript", "components"],
+      "language": "markdown",
+      "content": "你是 React 和 TypeScript 專家。請按照以下規範建立元件：\n\n## 元件規範\n\n### 1. 檔案結構\n```\ncomponents/\n└── ComponentName/\n    ├── index.tsx        # 主元件\n    ├── ComponentName.types.ts  # 型別定義\n    ├── ComponentName.styles.ts # 樣式 (如有)\n    └── ComponentName.test.tsx  # 測試\n```\n\n### 2. TypeScript 型別\n- 所有 props 必須有明確型別\n- 使用 `interface` 定義 props\n- 導出型別供外部使用\n\n### 3. 元件模式\n```tsx\nimport { forwardRef } from 'react';\nimport type { ComponentNameProps } from './ComponentName.types';\n\nexport const ComponentName = forwardRef<HTMLDivElement, ComponentNameProps>(\n  ({ children, className, ...props }, ref) => {\n    return (\n      <div ref={ref} className={cn(baseStyles, className)} {...props}>\n        {children}\n      </div>\n    );\n  }\n);\n\nComponentName.displayName = 'ComponentName';\n```\n\n### 4. 最佳實踐\n- 使用 `forwardRef` 支援 ref 傳遞\n- 使用 `displayName` 便於除錯\n- 支援 `className` 覆寫樣式\n- 展開 `...props` 支援原生屬性"
+    },
+    {
+      "id": "api-design-prompt",
+      "title": "REST API 設計提示詞",
+      "description": "設計 RESTful API 的系統提示詞",
+      "category": "coding",
+      "tags": ["api", "rest", "backend"],
+      "language": "markdown",
+      "content": "你是 API 設計專家。請按照 RESTful 最佳實踐設計 API：\n\n## 設計原則\n\n### 1. 資源命名\n- 使用複數名詞：`/users`, `/posts`\n- 使用小寫和連字號：`/user-profiles`\n- 避免動詞：用 `POST /users` 而非 `/createUser`\n\n### 2. HTTP 方法\n| 方法 | 用途 | 回應碼 |\n|------|------|--------|\n| GET | 讀取資源 | 200 |\n| POST | 建立資源 | 201 |\n| PUT | 完整更新 | 200 |\n| PATCH | 部分更新 | 200 |\n| DELETE | 刪除資源 | 204 |\n\n### 3. 回應格式\n```json\n{\n  \"success\": true,\n  \"data\": { ... },\n  \"meta\": {\n    \"page\": 1,\n    \"limit\": 20,\n    \"total\": 100\n  }\n}\n```\n\n### 4. 錯誤處理\n```json\n{\n  \"success\": false,\n  \"error\": {\n    \"code\": \"VALIDATION_ERROR\",\n    \"message\": \"Invalid email format\",\n    \"details\": [...]\n  }\n}\n```"
+    },
+    {
+      "id": "system-prompt-template",
+      "title": "通用系統提示詞模板",
+      "description": "建立高品質系統提示詞的基礎模板",
+      "category": "system",
+      "tags": ["template", "system-prompt", "ai"],
+      "language": "markdown",
+      "content": "# 系統提示詞模板\n\n## 角色定義\n你是一位 [專業領域] 專家，擁有 [相關經驗/技能]。\n\n## 任務目標\n你的主要任務是 [具體目標]。\n\n## 執行規範\n\n### 1. 輸入處理\n- 分析使用者的 [需求類型]\n- 確認 [關鍵資訊]\n\n### 2. 處理流程\n1. 首先 [步驟一]\n2. 接著 [步驟二]\n3. 最後 [步驟三]\n\n### 3. 輸出格式\n回應應包含：\n- [必要元素 1]\n- [必要元素 2]\n- [必要元素 3]\n\n## 限制條件\n- 不要 [限制 1]\n- 避免 [限制 2]\n- 確保 [要求 1]\n\n## 範例\n\n**使用者輸入**: [範例輸入]\n\n**預期輸出**: [範例輸出]"
+    },
+    {
+      "id": "git-commit-prompt",
+      "title": "Git Commit 訊息提示詞",
+      "description": "生成標準化 Git Commit 訊息的提示詞",
+      "category": "coding",
+      "tags": ["git", "commit", "conventional-commits"],
+      "language": "markdown",
+      "content": "請根據以下變更生成符合 Conventional Commits 規範的 commit 訊息：\n\n## Commit 類型\n- `feat`: 新功能\n- `fix`: 修復 bug\n- `docs`: 文件更新\n- `style`: 程式碼格式調整\n- `refactor`: 重構\n- `perf`: 效能優化\n- `test`: 測試相關\n- `chore`: 建置/工具相關\n\n## 格式\n```\n<type>(<scope>): <subject>\n\n<body>\n\n<footer>\n```\n\n## 規則\n1. subject 使用祈使句，首字母小寫\n2. subject 不超過 50 字元\n3. body 每行不超過 72 字元\n4. 說明「為什麼」而非「做了什麼」\n\n## 範例\n```\nfeat(auth): add JWT refresh token mechanism\n\nImplement automatic token refresh to improve user experience.\nRefresh occurs 5 minutes before expiration.\n\nCloses #123\n```"
+    },
+    {
+      "id": "documentation-prompt",
+      "title": "技術文件撰寫提示詞",
+      "description": "撰寫清晰技術文件的系統提示詞",
+      "category": "coding",
+      "tags": ["documentation", "technical-writing", "readme"],
+      "language": "markdown",
+      "content": "你是技術文件撰寫專家。請按照以下結構撰寫文件：\n\n## 文件結構\n\n### 1. 概述 (Overview)\n- 專案用途\n- 主要功能\n- 目標使用者\n\n### 2. 快速開始 (Quick Start)\n```bash\n# 安裝\nnpm install package-name\n\n# 基本使用\nimport { something } from 'package-name'\n```\n\n### 3. API 文件\n- 每個函式/元件的說明\n- 參數類型與說明\n- 回傳值說明\n- 使用範例\n\n### 4. 配置選項\n| 選項 | 類型 | 預設值 | 說明 |\n|------|------|--------|------|\n| ... | ... | ... | ... |\n\n### 5. 範例\n- 基本用法\n- 進階用法\n- 常見情境\n\n### 6. FAQ\n- 常見問題與解答\n\n## 寫作原則\n- 使用簡潔清晰的語言\n- 提供可執行的程式碼範例\n- 保持一致的格式風格"
+    }
+  ]
+}

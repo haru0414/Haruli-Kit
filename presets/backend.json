@@ -1,0 +1,26 @@
+{
+  "name": "backend",
+  "displayName": "Express Backend",
+  "description": "Express.js 後端基礎套件",
+  "icon": "🖥️",
+  "packages": {
+    "dependencies": [
+      "express",
+      "cors",
+      "helmet",
+      "cookie-parser",
+      "dotenv",
+      "express-rate-limit",
+      "zod"
+    ],
+    "devDependencies": [
+      "@types/express",
+      "@types/cors",
+      "@types/cookie-parser",
+      "tsx"
+    ]
+  },
+  "scripts": {
+    "dev": "tsx watch src/index.ts"
+  }
+}

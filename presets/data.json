@@ -1,0 +1,13 @@
+{
+  "name": "data",
+  "displayName": "Data Fetching",
+  "description": "資料請求與狀態管理",
+  "icon": "🌐",
+  "packages": {
+    "dependencies": [
+      "zustand",
+      "@tanstack/react-query",
+      "axios"
+    ]
+  }
+}

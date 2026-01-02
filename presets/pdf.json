@@ -1,0 +1,12 @@
+{
+  "name": "pdf",
+  "displayName": "PDF Generation",
+  "description": "PDF 生成與列印",
+  "icon": "📄",
+  "packages": {
+    "dependencies": [
+      "puppeteer",
+      "react-to-print"
+    ]
+  }
+}

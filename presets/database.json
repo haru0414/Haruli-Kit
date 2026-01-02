@@ -1,0 +1,20 @@
+{
+  "name": "database",
+  "displayName": "Database",
+  "description": "資料庫 ORM 與連接",
+  "icon": "🗄️",
+  "packages": {
+    "dependencies": [
+      "prisma",
+      "@prisma/client"
+    ]
+  },
+  "scripts": {
+    "db:push": "prisma db push",
+    "db:generate": "prisma generate",
+    "db:studio": "prisma studio"
+  },
+  "configFiles": {
+    "prisma/schema.prisma": true
+  }
+}

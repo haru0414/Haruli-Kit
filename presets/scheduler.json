@@ -1,0 +1,14 @@
+{
+  "name": "scheduler",
+  "displayName": "Task Scheduler",
+  "description": "排程任務與定時執行",
+  "icon": "⏰",
+  "packages": {
+    "dependencies": [
+      "node-cron"
+    ],
+    "devDependencies": [
+      "@types/node-cron"
+    ]
+  }
+}

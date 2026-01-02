@@ -1,0 +1,23 @@
+{
+  "name": "haruli-theme",
+  "displayName": "Haruli Ronin Theme",
+  "description": "武士風格 Tailwind 設計系統",
+  "icon": "🎌",
+  "packages": {
+    "dependencies": [
+      "clsx",
+      "tailwind-merge"
+    ],
+    "devDependencies": [
+      "tailwindcss",
+      "postcss",
+      "autoprefixer"
+    ]
+  },
+  "templates": {
+    "tailwind.config.ts": "templates/tailwind/tailwind.config.ts",
+    "src/app/globals.css": "templates/tailwind/globals.css",
+    "src/lib/utils.ts": "templates/tailwind/utils.ts"
+  },
+  "notes": "會覆蓋現有的 tailwind.config.ts 和 globals.css"
+}

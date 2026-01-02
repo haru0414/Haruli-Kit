@@ -1,0 +1,19 @@
+{
+  "name": "utils",
+  "displayName": "Utilities",
+  "description": "常用工具函式庫",
+  "icon": "🔧",
+  "packages": {
+    "dependencies": [
+      "date-fns",
+      "dayjs",
+      "lodash-es",
+      "nanoid",
+      "file-saver"
+    ],
+    "devDependencies": [
+      "@types/lodash-es",
+      "@types/file-saver"
+    ]
+  }
+}

@@ -1,0 +1,15 @@
+{
+  "name": "router",
+  "displayName": "Routing",
+  "description": "路由管理 (SPA 專案使用)",
+  "icon": "🧭",
+  "packages": {
+    "dependencies": [
+      "react-router-dom"
+    ],
+    "devDependencies": [
+      "@types/react-router-dom"
+    ]
+  },
+  "notes": "Next.js 專案不需要此 preset，已內建路由"
+}

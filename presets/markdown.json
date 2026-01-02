@@ -1,0 +1,13 @@
+{
+  "name": "markdown",
+  "displayName": "Markdown Rendering",
+  "description": "Markdown 渲染與顯示",
+  "icon": "📝",
+  "packages": {
+    "dependencies": [
+      "react-markdown",
+      "remark-gfm",
+      "rehype-highlight"
+    ]
+  }
+}

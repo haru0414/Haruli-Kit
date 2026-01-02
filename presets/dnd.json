@@ -1,0 +1,13 @@
+{
+  "name": "dnd",
+  "displayName": "Drag & Drop",
+  "description": "拖放排序功能",
+  "icon": "🎯",
+  "packages": {
+    "dependencies": [
+      "@dnd-kit/core",
+      "@dnd-kit/sortable",
+      "@dnd-kit/utilities"
+    ]
+  }
+}

@@ -1,0 +1,13 @@
+{
+  "name": "storage",
+  "displayName": "Cloud Storage",
+  "description": "AWS S3 檔案儲存",
+  "icon": "☁️",
+  "packages": {
+    "dependencies": [
+      "@aws-sdk/client-s3",
+      "@aws-sdk/s3-request-presigner"
+    ]
+  },
+  "notes": "需要設定 AWS_ACCESS_KEY_ID, AWS_SECRET_ACCESS_KEY 環境變數"
+}

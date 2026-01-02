@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import { ArrowRight, Check, Link2, Layers, ScrollText, Terminal } from "lucide-react";
 
 export default function Home() {
@@ -105,21 +106,39 @@ export default function Home() {
 
       {/* Tech Stack Marquee */}
       <div className="bg-slate-900 border-y border-slate-800 overflow-hidden py-6">
-        <div className="relative flex overflow-x-hidden">
-          <div className="py-2 animate-marquee whitespace-nowrap flex gap-16 items-center opacity-50 hover:opacity-100 transition-opacity">
+        <div className="relative flex overflow-x-hidden group">
+          {/* First copy */}
+          <div className="py-2 animate-marquee whitespace-nowrap flex gap-16 items-center opacity-50 group-hover:opacity-100 transition-opacity">
             {[
               "React",
-              "Vue",
-              "TypeScript",
-              "Tailwind",
-              "Node.js",
               "Next.js",
-              "Vite",
-              "React",
-              "Vue",
               "TypeScript",
               "Tailwind",
               "Node.js",
+              "Vue",
+              "Vite",
+              "Prisma",
+              "Zustand",
+              "Framer Motion",
+            ].map((tech, i) => (
+              <span key={i} className="text-2xl font-bold">
+                {tech}
+              </span>
+            ))}
+          </div>
+          {/* Second copy for seamless loop */}
+          <div className="py-2 animate-marquee whitespace-nowrap flex gap-16 items-center opacity-50 group-hover:opacity-100 transition-opacity" aria-hidden="true">
+            {[
+              "React",
+              "Next.js",
+              "TypeScript",
+              "Tailwind",
+              "Node.js",
+              "Vue",
+              "Vite",
+              "Prisma",
+              "Zustand",
+              "Framer Motion",
             ].map((tech, i) => (
               <span key={i} className="text-2xl font-bold">
                 {tech}
@@ -293,17 +312,23 @@ export default function Home() {
           </div>
 
           <div className="border-t border-slate-800 pt-12 flex flex-col md:flex-row justify-between items-center">
-            <div className="flex items-center gap-2 mb-4 md:mb-0">
-              <div className="w-6 h-6 bg-slate-800 flex items-center justify-center border border-slate-700">
-                <span className="text-orange-400 font-bold text-xs">H</span>
-              </div>
+            <div className="flex items-center gap-3 mb-4 md:mb-0">
+              <Image
+                src="/haru-logo.jpg"
+                alt="Haruli Kit"
+                width={28}
+                height={28}
+                className="rounded"
+              />
               <span className="font-mono text-sm text-slate-500">
                 © 2025 Haruli Kit. MIT License.
               </span>
             </div>
             <div className="flex gap-6">
               <a
-                href="https://github.com"
+                href="https://github.com/haru0414/Haruli-Kit"
+                target="_blank"
+                rel="noopener noreferrer"
                 className="text-slate-500 hover:text-orange-400 transition-colors"
               >
                 GitHub

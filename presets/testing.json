@@ -1,0 +1,25 @@
+{
+  "name": "testing",
+  "displayName": "Testing Suite",
+  "description": "測試框架與工具",
+  "icon": "🧪",
+  "packages": {
+    "devDependencies": [
+      "vitest",
+      "@vitejs/plugin-react",
+      "@testing-library/react",
+      "@testing-library/jest-dom",
+      "@testing-library/user-event",
+      "jsdom",
+      "msw"
+    ]
+  },
+  "scripts": {
+    "test": "vitest",
+    "test:ui": "vitest --ui",
+    "test:coverage": "vitest --coverage"
+  },
+  "configFiles": {
+    "vitest.config.ts": true
+  }
+}

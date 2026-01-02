@@ -1,0 +1,7 @@
+{
+  "name": "full",
+  "displayName": "Full Stack",
+  "description": "完整開發套件組合 (包含所有 presets)",
+  "icon": "🚀",
+  "extends": ["base", "ui", "form", "data", "utils", "auth", "database", "testing", "dev"]
+}

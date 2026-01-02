@@ -1,0 +1,16 @@
+{
+  "name": "dev",
+  "displayName": "Developer Tools",
+  "description": "開發與測試工具",
+  "icon": "🧪",
+  "packages": {
+    "devDependencies": [
+      "prettier",
+      "prettier-plugin-tailwindcss",
+      "eslint-config-prettier"
+    ]
+  },
+  "configFiles": {
+    ".prettierrc": true
+  }
+}

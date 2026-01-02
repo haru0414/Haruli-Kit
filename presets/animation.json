@@ -1,0 +1,13 @@
+{
+  "name": "animation",
+  "displayName": "Advanced Animation",
+  "description": "進階動畫效果",
+  "icon": "✨",
+  "packages": {
+    "dependencies": [
+      "framer-motion",
+      "lottie-react",
+      "gsap"
+    ]
+  }
+}

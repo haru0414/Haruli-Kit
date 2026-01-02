@@ -1,0 +1,463 @@
+/* ═══════════════════════════════════════════════════════════════════════════
+   🎌 Haruli Kit - Ronin Theme
+   A samurai-inspired design system for modern web applications
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+/* Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap');
+
+/* Tailwind */
+@import "tailwindcss";
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   🎨 CSS Variables - Design Tokens
+   ═══════════════════════════════════════════════════════════════════════════ */
+:root {
+  /* === Core Colors === */
+  --background: #0F172A;           /* 夜幕深藍 Slate-900 */
+  --surface: #1E293B;              /* 武士服青 Slate-800 */
+  --surface-hover: #334155;        /* Slate-700 */
+  --border: #334155;               /* Slate-700 */
+
+  /* === Brand Colors === */
+  --primary: #F97316;              /* 落日橘 Orange-500 */
+  --primary-light: #FB923C;        /* Orange-400 */
+  --primary-glow: rgba(249, 115, 22, 0.3);
+
+  /* === Accent Colors === */
+  --accent-blue: #38BDF8;          /* 刀光藍 Sky-400 */
+  --accent-yellow: #FEF3C7;        /* 雲朵黃 Amber-100 */
+  --accent-cyan: #06B6D4;          /* Cyan-500 */
+  --accent-pink: #F472B6;          /* Pink-400 */
+  --accent-green: #22C55E;         /* Green-500 */
+
+  /* === Text Colors === */
+  --foreground: #F8FAFC;           /* Slate-50 */
+  --muted: #94A3B8;                /* Slate-400 */
+  --muted-dark: #64748B;           /* Slate-500 */
+
+  /* === Shadows === */
+  --hard-shadow: 4px 4px 0px var(--primary);
+  --hard-shadow-sm: 2px 2px 0px var(--primary);
+  --hard-shadow-white: 4px 4px 0px #FFFFFF;
+
+  /* === Typography === */
+  --font-sans: 'Space Grotesk', system-ui, sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+
+  /* === Transitions === */
+  --transition-fast: 0.15s ease;
+  --transition-base: 0.2s ease;
+  --transition-slow: 0.3s ease;
+}
+
+/* Tailwind v4 Theme Mapping */
+@theme inline {
+  --color-background: var(--background);
+  --color-surface: var(--surface);
+  --color-surface-hover: var(--surface-hover);
+  --color-border: var(--border);
+  --color-primary: var(--primary);
+  --color-primary-light: var(--primary-light);
+  --color-accent-blue: var(--accent-blue);
+  --color-accent-yellow: var(--accent-yellow);
+  --color-foreground: var(--foreground);
+  --color-muted: var(--muted);
+  --font-sans: var(--font-sans);
+  --font-mono: var(--font-mono);
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   🏛️ Base Styles
+   ═══════════════════════════════════════════════════════════════════════════ */
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-sans);
+  min-height: 100vh;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Selection */
+::selection {
+  background: var(--primary);
+  color: var(--background);
+}
+
+/* Focus Styles */
+*:focus-visible {
+  outline: 2px solid var(--primary);
+  outline-offset: 2px;
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   📜 Custom Scrollbar - Katana Style
+   ═══════════════════════════════════════════════════════════════════════════ */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--background);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--surface-hover);
+  border-left: 2px solid var(--primary);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--muted-dark);
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   🔘 Button Components
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+/* Primary Button - Hard Shadow Style */
+.btn-katana {
+  position: relative;
+  background: var(--primary);
+  color: var(--background);
+  font-weight: 600;
+  padding: 0.75rem 1.5rem;
+  border: none;
+  box-shadow: var(--hard-shadow-white);
+  transition: all var(--transition-fast);
+  cursor: pointer;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.btn-katana:hover {
+  transform: translate(2px, 2px);
+  box-shadow: 2px 2px 0px #FFFFFF;
+}
+
+.btn-katana:active {
+  transform: translate(4px, 4px);
+  box-shadow: none;
+}
+
+/* Ghost Button */
+.btn-ghost {
+  background: transparent;
+  color: var(--foreground);
+  border: 1px solid var(--border);
+  padding: 0.75rem 1.5rem;
+  font-weight: 500;
+  transition: all var(--transition-fast);
+  cursor: pointer;
+}
+
+.btn-ghost:hover {
+  border-color: var(--primary);
+  color: var(--primary);
+}
+
+/* Secondary Button */
+.btn-secondary {
+  background: var(--surface);
+  color: var(--foreground);
+  border: 1px solid var(--border);
+  padding: 0.75rem 1.5rem;
+  font-weight: 500;
+  transition: all var(--transition-fast);
+  cursor: pointer;
+}
+
+.btn-secondary:hover {
+  background: var(--surface-hover);
+  border-color: var(--primary);
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   📝 Input Components
+   ═══════════════════════════════════════════════════════════════════════════ */
+.input-katana {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  color: var(--foreground);
+  padding: 0.75rem 1rem;
+  font-family: var(--font-mono);
+  transition: all var(--transition-base);
+}
+
+.input-katana:focus {
+  outline: none;
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px var(--primary-glow);
+}
+
+.input-katana::placeholder {
+  color: var(--muted-dark);
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   🃏 Card Components - Katana Cut Effect
+   ═══════════════════════════════════════════════════════════════════════════ */
+.card-cut {
+  background: rgba(30, 41, 59, 0.9);
+  border: 1px solid var(--border);
+  clip-path: polygon(0 0, calc(100% - 16px) 0, 100% 16px, 100% 100%, 16px 100%, 0 calc(100% - 16px));
+  transition: all var(--transition-base);
+}
+
+.card-cut:hover {
+  border-color: var(--primary);
+  box-shadow: 0 0 20px var(--primary-glow);
+}
+
+/* Cut Corners Utility Classes */
+.cut-corners {
+  clip-path: polygon(
+    15px 0, 100% 0,
+    100% calc(100% - 15px),
+    calc(100% - 15px) 100%,
+    0 100%,
+    0 15px
+  );
+}
+
+.cut-corners-sm {
+  clip-path: polygon(
+    8px 0, 100% 0,
+    100% calc(100% - 8px),
+    calc(100% - 8px) 100%,
+    0 100%,
+    0 8px
+  );
+}
+
+.cut-corners-lg {
+  clip-path: polygon(
+    20px 0, 100% 0,
+    100% calc(100% - 20px),
+    calc(100% - 20px) 100%,
+    0 100%,
+    0 20px
+  );
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   🌅 Background Effects
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+/* Ronin Sun - Floating Gradient */
+.ronin-sun {
+  position: fixed;
+  top: 10%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 80vh;
+  height: 80vh;
+  background: linear-gradient(180deg, #FB923C 0%, #F43F5E 100%);
+  border-radius: 50%;
+  z-index: -1;
+  opacity: 0.12;
+  filter: blur(80px);
+  pointer-events: none;
+}
+
+/* Grid Pattern Background */
+.grid-bg {
+  background-image: linear-gradient(rgba(51, 65, 85, 0.08) 1px, transparent 1px),
+                    linear-gradient(90deg, rgba(51, 65, 85, 0.08) 1px, transparent 1px);
+  background-size: 40px 40px;
+}
+
+/* Sunset Gradient */
+.sunset-gradient {
+  background: radial-gradient(ellipse at 50% 0%, rgba(251, 146, 60, 0.15) 0%, transparent 50%),
+              radial-gradient(ellipse at 80% 20%, rgba(56, 189, 248, 0.08) 0%, transparent 40%),
+              var(--background);
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   ⚡ Animations
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+/* Fade Up */
+@keyframes fade-up {
+  0% { opacity: 0; transform: translateY(20px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+
+.animate-fade-up {
+  animation: fade-up 0.5s ease-out forwards;
+}
+
+/* Slide In Right */
+@keyframes slide-in-right {
+  0% { opacity: 0; transform: translateX(40px); }
+  100% { opacity: 1; transform: translateX(0); }
+}
+
+.animate-slide-in {
+  animation: slide-in-right 0.4s ease-out forwards;
+}
+
+/* Slash In */
+@keyframes slash-in {
+  0% { opacity: 0; clip-path: polygon(0 0, 0 0, 0 100%, 0 100%); }
+  100% { opacity: 1; clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%); }
+}
+
+.animate-slash-in {
+  animation: slash-in 0.4s ease-out forwards;
+}
+
+/* Blade Flash */
+@keyframes blade-flash {
+  0% { opacity: 0; transform: translateX(-100%) rotate(-45deg); }
+  50% { opacity: 1; }
+  100% { opacity: 0; transform: translateX(100%) rotate(-45deg); }
+}
+
+.blade-flash {
+  animation: blade-flash 0.3s ease-out;
+}
+
+/* Float */
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-20px); }
+}
+
+.animate-float {
+  animation: float 6s ease-in-out infinite;
+}
+
+/* Marquee */
+@keyframes marquee {
+  0% { transform: translateX(0%); }
+  100% { transform: translateX(-50%); }
+}
+
+.animate-marquee {
+  animation: marquee 30s linear infinite;
+}
+
+/* Stagger Children */
+.stagger-children > * {
+  opacity: 0;
+  animation: fade-up 0.4s ease-out forwards;
+}
+
+.stagger-children > *:nth-child(1) { animation-delay: 0.1s; }
+.stagger-children > *:nth-child(2) { animation-delay: 0.2s; }
+.stagger-children > *:nth-child(3) { animation-delay: 0.3s; }
+.stagger-children > *:nth-child(4) { animation-delay: 0.4s; }
+.stagger-children > *:nth-child(5) { animation-delay: 0.5s; }
+.stagger-children > *:nth-child(6) { animation-delay: 0.6s; }
+.stagger-children > *:nth-child(7) { animation-delay: 0.7s; }
+.stagger-children > *:nth-child(8) { animation-delay: 0.8s; }
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   💻 Code Styling
+   ═══════════════════════════════════════════════════════════════════════════ */
+pre[class*="language-"],
+pre {
+  background: var(--surface) !important;
+  border: 1px solid var(--border);
+  border-left: 3px solid var(--primary);
+  border-radius: 0;
+}
+
+code {
+  font-family: var(--font-mono);
+}
+
+/* Syntax Highlighting Tokens */
+.token-keyword { color: #F472B6; }
+.token-function { color: #FB923C; }
+.token-string { color: #06B6D4; }
+.token-comment { color: #64748B; font-style: italic; }
+.token-number { color: #FB923C; }
+.token-operator { color: #94A3B8; }
+.token-variable { color: #38BDF8; }
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   🏷️ Badge & Tag Components
+   ═══════════════════════════════════════════════════════════════════════════ */
+.badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.25rem 0.75rem;
+  font-size: 0.75rem;
+  font-family: var(--font-mono);
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.badge-primary {
+  background: rgba(249, 115, 22, 0.2);
+  color: var(--primary-light);
+  border: 1px solid rgba(249, 115, 22, 0.3);
+}
+
+.badge-cyan {
+  background: rgba(6, 182, 212, 0.2);
+  color: var(--accent-cyan);
+  border: 1px solid rgba(6, 182, 212, 0.3);
+}
+
+.badge-green {
+  background: rgba(34, 197, 94, 0.2);
+  color: var(--accent-green);
+  border: 1px solid rgba(34, 197, 94, 0.3);
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   📋 Utility Classes
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+/* Text Gradient */
+.text-gradient {
+  background: linear-gradient(to right, var(--primary), #F43F5E);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Glow Effect */
+.glow {
+  box-shadow: 0 0 20px var(--primary-glow);
+}
+
+.glow-lg {
+  box-shadow: 0 0 40px var(--primary-glow);
+}
+
+/* Backdrop Blur */
+.backdrop-blur-surface {
+  background: rgba(30, 41, 59, 0.8);
+  backdrop-filter: blur(12px);
+}
+
+/* Divider */
+.divider {
+  height: 1px;
+  background: linear-gradient(to right, transparent, var(--border), transparent);
+}
+
+/* No Scrollbar */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}

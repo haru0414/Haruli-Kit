@@ -1,0 +1,13 @@
+{
+  "name": "charts",
+  "displayName": "Data Visualization",
+  "description": "圖表與資料視覺化",
+  "icon": "📊",
+  "packages": {
+    "dependencies": [
+      "recharts",
+      "echarts",
+      "echarts-for-react"
+    ]
+  }
+}

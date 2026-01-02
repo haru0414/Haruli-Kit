@@ -1,0 +1,14 @@
+{
+  "name": "email",
+  "displayName": "Email Service",
+  "description": "郵件發送功能",
+  "icon": "📧",
+  "packages": {
+    "dependencies": [
+      "nodemailer"
+    ],
+    "devDependencies": [
+      "@types/nodemailer"
+    ]
+  }
+}

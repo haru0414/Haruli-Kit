@@ -1,0 +1,90 @@
+{
+  "categories": [
+    { "id": "tailwind", "name": "Tailwind CSS", "icon": "Palette" },
+    { "id": "typescript", "name": "TypeScript", "icon": "FileCode" },
+    { "id": "eslint", "name": "ESLint", "icon": "Shield" },
+    { "id": "vscode", "name": "VS Code", "icon": "Settings2" }
+  ],
+  "configs": [
+    {
+      "id": "tailwind-ronin-theme",
+      "title": "Tailwind Ronin Theme",
+      "description": "武士風格 Tailwind 設計系統配置，包含自訂顏色、陰影、動畫",
+      "category": "tailwind",
+      "tags": ["theme", "dark-mode", "design-system"],
+      "fileName": "tailwind.config.ts",
+      "language": "typescript",
+      "code": "import type { Config } from \"tailwindcss\";\n\nconst config: Config = {\n  content: [\n    \"./src/**/*.{js,ts,jsx,tsx,mdx}\",\n    \"./app/**/*.{js,ts,jsx,tsx,mdx}\",\n    \"./components/**/*.{js,ts,jsx,tsx,mdx}\",\n  ],\n  theme: {\n    extend: {\n      colors: {\n        background: \"var(--background)\",\n        surface: {\n          DEFAULT: \"var(--surface)\",\n          hover: \"var(--surface-hover)\",\n        },\n        border: \"var(--border)\",\n        primary: {\n          DEFAULT: \"var(--primary)\",\n          light: \"var(--primary-light)\",\n          glow: \"var(--primary-glow)\",\n        },\n        accent: {\n          blue: \"var(--accent-blue)\",\n          yellow: \"var(--accent-yellow)\",\n          cyan: \"#06B6D4\",\n          pink: \"#F472B6\",\n          green: \"#22C55E\",\n        },\n        foreground: \"var(--foreground)\",\n        muted: {\n          DEFAULT: \"var(--muted)\",\n          dark: \"var(--muted-dark)\",\n        },\n      },\n      fontFamily: {\n        sans: [\"var(--font-sans)\", \"Space Grotesk\", \"system-ui\", \"sans-serif\"],\n        mono: [\"var(--font-mono)\", \"JetBrains Mono\", \"monospace\"],\n      },\n      boxShadow: {\n        \"hard\": \"4px 4px 0px var(--primary)\",\n        \"hard-sm\": \"2px 2px 0px var(--primary)\",\n        \"hard-white\": \"4px 4px 0px #FFFFFF\",\n        \"glow\": \"0 0 20px var(--primary-glow)\",\n      },\n      animation: {\n        \"fade-up\": \"fade-up 0.5s ease-out forwards\",\n        \"slash-in\": \"slash-in 0.4s ease-out forwards\",\n        \"float\": \"float 6s ease-in-out infinite\",\n        \"marquee\": \"marquee 30s linear infinite\",\n      },\n      keyframes: {\n        \"fade-up\": {\n          \"0%\": { opacity: \"0\", transform: \"translateY(20px)\" },\n          \"100%\": { opacity: \"1\", transform: \"translateY(0)\" },\n        },\n        \"slash-in\": {\n          \"0%\": { opacity: \"0\", clipPath: \"polygon(0 0, 0 0, 0 100%, 0 100%)\" },\n          \"100%\": { opacity: \"1\", clipPath: \"polygon(0 0, 100% 0, 100% 100%, 0 100%)\" },\n        },\n        \"float\": {\n          \"0%, 100%\": { transform: \"translateY(0)\" },\n          \"50%\": { transform: \"translateY(-20px)\" },\n        },\n        \"marquee\": {\n          \"0%\": { transform: \"translateX(0%)\" },\n          \"100%\": { transform: \"translateX(-50%)\" },\n        },\n      },\n    },\n  },\n  plugins: [],\n};\n\nexport default config;"
+    },
+    {
+      "id": "globals-css-ronin",
+      "title": "Ronin Theme CSS Variables",
+      "description": "武士主題 CSS 變數與基礎樣式，包含切角卡片、硬陰影按鈕",
+      "category": "tailwind",
+      "tags": ["css-variables", "components", "animations"],
+      "fileName": "globals.css",
+      "language": "css",
+      "code": "@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap');\n@import \"tailwindcss\";\n\n:root {\n  /* Core Colors */\n  --background: #0F172A;\n  --surface: #1E293B;\n  --surface-hover: #334155;\n  --border: #334155;\n\n  /* Brand Colors */\n  --primary: #F97316;\n  --primary-light: #FB923C;\n  --primary-glow: rgba(249, 115, 22, 0.3);\n\n  /* Accent Colors */\n  --accent-blue: #38BDF8;\n  --accent-yellow: #FEF3C7;\n\n  /* Text Colors */\n  --foreground: #F8FAFC;\n  --muted: #94A3B8;\n  --muted-dark: #64748B;\n\n  /* Fonts */\n  --font-sans: 'Space Grotesk', system-ui, sans-serif;\n  --font-mono: 'JetBrains Mono', monospace;\n}\n\n/* Cut Corners Utility */\n.cut-corners {\n  clip-path: polygon(\n    15px 0, 100% 0,\n    100% calc(100% - 15px),\n    calc(100% - 15px) 100%,\n    0 100%,\n    0 15px\n  );\n}\n\n.cut-corners-sm {\n  clip-path: polygon(\n    8px 0, 100% 0,\n    100% calc(100% - 8px),\n    calc(100% - 8px) 100%,\n    0 100%,\n    0 8px\n  );\n}\n\n/* Katana Button */\n.btn-katana {\n  position: relative;\n  background: var(--primary);\n  color: var(--background);\n  font-weight: 600;\n  padding: 0.75rem 1.5rem;\n  box-shadow: 4px 4px 0px #FFFFFF;\n  transition: all 0.15s ease;\n  cursor: pointer;\n}\n\n.btn-katana:hover {\n  transform: translate(2px, 2px);\n  box-shadow: 2px 2px 0px #FFFFFF;\n}\n\n/* Grid Background */\n.grid-bg {\n  background-image: linear-gradient(rgba(51, 65, 85, 0.08) 1px, transparent 1px),\n                    linear-gradient(90deg, rgba(51, 65, 85, 0.08) 1px, transparent 1px);\n  background-size: 40px 40px;\n}\n\n/* Ronin Sun */\n.ronin-sun {\n  position: fixed;\n  top: 10%;\n  left: 50%;\n  transform: translateX(-50%);\n  width: 80vh;\n  height: 80vh;\n  background: linear-gradient(180deg, #FB923C 0%, #F43F5E 100%);\n  border-radius: 50%;\n  z-index: -1;\n  opacity: 0.12;\n  filter: blur(80px);\n  pointer-events: none;\n}"
+    },
+    {
+      "id": "tsconfig-nextjs",
+      "title": "Next.js TypeScript 配置",
+      "description": "Next.js 專案的 TypeScript 標準配置",
+      "category": "typescript",
+      "tags": ["nextjs", "strict", "paths"],
+      "fileName": "tsconfig.json",
+      "language": "json",
+      "code": "{\n  \"compilerOptions\": {\n    \"target\": \"ES2017\",\n    \"lib\": [\"dom\", \"dom.iterable\", \"esnext\"],\n    \"allowJs\": true,\n    \"skipLibCheck\": true,\n    \"strict\": true,\n    \"noEmit\": true,\n    \"esModuleInterop\": true,\n    \"module\": \"esnext\",\n    \"moduleResolution\": \"bundler\",\n    \"resolveJsonModule\": true,\n    \"isolatedModules\": true,\n    \"jsx\": \"preserve\",\n    \"incremental\": true,\n    \"plugins\": [\n      {\n        \"name\": \"next\"\n      }\n    ],\n    \"paths\": {\n      \"@/*\": [\"./src/*\"]\n    }\n  },\n  \"include\": [\"next-env.d.ts\", \"**/*.ts\", \"**/*.tsx\", \".next/types/**/*.ts\"],\n  \"exclude\": [\"node_modules\"]\n}"
+    },
+    {
+      "id": "eslint-config-next",
+      "title": "Next.js ESLint 配置",
+      "description": "Next.js 專案的 ESLint 配置，包含 TypeScript 規則",
+      "category": "eslint",
+      "tags": ["nextjs", "typescript", "prettier"],
+      "fileName": "eslint.config.mjs",
+      "language": "javascript",
+      "code": "import { dirname } from \"path\";\nimport { fileURLToPath } from \"url\";\nimport { FlatCompat } from \"@eslint/eslintrc\";\n\nconst __filename = fileURLToPath(import.meta.url);\nconst __dirname = dirname(__filename);\n\nconst compat = new FlatCompat({\n  baseDirectory: __dirname,\n});\n\nconst eslintConfig = [\n  ...compat.extends(\"next/core-web-vitals\", \"next/typescript\"),\n  {\n    rules: {\n      \"@typescript-eslint/no-unused-vars\": \"warn\",\n      \"@typescript-eslint/no-explicit-any\": \"warn\",\n      \"react-hooks/exhaustive-deps\": \"warn\",\n    },\n  },\n];\n\nexport default eslintConfig;"
+    },
+    {
+      "id": "vscode-settings",
+      "title": "VS Code 專案設定",
+      "description": "推薦的 VS Code 專案設定，包含格式化與 Tailwind 支援",
+      "category": "vscode",
+      "tags": ["editor", "formatting", "tailwind"],
+      "fileName": ".vscode/settings.json",
+      "language": "json",
+      "code": "{\n  \"editor.defaultFormatter\": \"esbenp.prettier-vscode\",\n  \"editor.formatOnSave\": true,\n  \"editor.codeActionsOnSave\": {\n    \"source.fixAll.eslint\": \"explicit\",\n    \"source.organizeImports\": \"explicit\"\n  },\n  \"typescript.tsdk\": \"node_modules/typescript/lib\",\n  \"typescript.enablePromptUseWorkspaceTsdk\": true,\n  \"tailwindCSS.experimental.classRegex\": [\n    [\"cva\\\\(([^)]*)\\\\)\", \"[\\\"'`]([^\\\"'`]*).*?[\\\"'`]\"]\n  ],\n  \"files.associations\": {\n    \"*.css\": \"tailwindcss\"\n  },\n  \"editor.quickSuggestions\": {\n    \"strings\": true\n  }\n}"
+    },
+    {
+      "id": "vscode-extensions",
+      "title": "VS Code 推薦擴充套件",
+      "description": "專案推薦安裝的 VS Code 擴充套件",
+      "category": "vscode",
+      "tags": ["extensions", "developer-experience"],
+      "fileName": ".vscode/extensions.json",
+      "language": "json",
+      "code": "{\n  \"recommendations\": [\n    \"dbaeumer.vscode-eslint\",\n    \"esbenp.prettier-vscode\",\n    \"bradlc.vscode-tailwindcss\",\n    \"ms-vscode.vscode-typescript-next\",\n    \"formulahendry.auto-rename-tag\",\n    \"christian-kohler.path-intellisense\",\n    \"streetsidesoftware.code-spell-checker\",\n    \"usernamehw.errorlens\",\n    \"PKief.material-icon-theme\"\n  ]\n}"
+    },
+    {
+      "id": "prettier-config",
+      "title": "Prettier 配置",
+      "description": "程式碼格式化 Prettier 配置",
+      "category": "eslint",
+      "tags": ["formatting", "code-style"],
+      "fileName": ".prettierrc",
+      "language": "json",
+      "code": "{\n  \"semi\": true,\n  \"singleQuote\": true,\n  \"tabWidth\": 2,\n  \"trailingComma\": \"es5\",\n  \"printWidth\": 100,\n  \"bracketSpacing\": true,\n  \"arrowParens\": \"always\",\n  \"endOfLine\": \"lf\",\n  \"plugins\": [\"prettier-plugin-tailwindcss\"],\n  \"tailwindFunctions\": [\"cn\", \"clsx\"]\n}"
+    },
+    {
+      "id": "cn-utility",
+      "title": "cn() Tailwind 工具函式",
+      "description": "合併 Tailwind class 的工具函式",
+      "category": "tailwind",
+      "tags": ["utility", "classname", "tailwind-merge"],
+      "fileName": "src/lib/utils.ts",
+      "language": "typescript",
+      "code": "import { clsx, type ClassValue } from 'clsx';\nimport { twMerge } from 'tailwind-merge';\n\n/**\n * Merge Tailwind CSS classes with clsx and tailwind-merge\n * Handles class conflicts intelligently\n *\n * @example\n * cn('px-4 py-2', 'px-6') // => 'py-2 px-6'\n * cn('bg-red-500', condition && 'bg-blue-500')\n */\nexport function cn(...inputs: ClassValue[]) {\n  return twMerge(clsx(inputs));\n}"
+    }
+  ]
+}

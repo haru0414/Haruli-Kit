@@ -1,0 +1,13 @@
+{
+  "name": "form",
+  "displayName": "Form Handling",
+  "description": "表單驗證與處理",
+  "icon": "📝",
+  "packages": {
+    "dependencies": [
+      "react-hook-form",
+      "zod",
+      "@hookform/resolvers"
+    ]
+  }
+}

@@ -1,0 +1,11 @@
+{
+  "name": "carousel",
+  "displayName": "Carousel & Slider",
+  "description": "輪播與滑動元件",
+  "icon": "🎠",
+  "packages": {
+    "dependencies": [
+      "swiper"
+    ]
+  }
+}

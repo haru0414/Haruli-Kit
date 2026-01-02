@@ -1,0 +1,14 @@
+{
+  "name": "antd",
+  "displayName": "Ant Design",
+  "description": "Ant Design UI 框架 (企業級)",
+  "icon": "🐜",
+  "packages": {
+    "dependencies": [
+      "antd",
+      "@ant-design/icons",
+      "dayjs"
+    ]
+  },
+  "notes": "適合後台管理系統，與 Tailwind 可能有樣式衝突"
+}

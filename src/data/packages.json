@@ -1,11 +1,13 @@
 {
   "categories": [
     { "id": "ui", "name": "UI 框架", "icon": "🎨" },
+    { "id": "notification", "name": "通知/Toast", "icon": "🔔" },
     { "id": "state", "name": "狀態管理", "icon": "📦" },
     { "id": "form", "name": "表單處理", "icon": "📝" },
     { "id": "animation", "name": "動畫效果", "icon": "✨" },
     { "id": "utility", "name": "工具函式", "icon": "🔧" },
     { "id": "fetch", "name": "資料請求", "icon": "🌐" },
+    { "id": "dnd", "name": "拖放排序", "icon": "🎯" },
     { "id": "testing", "name": "測試工具", "icon": "🧪" }
   ],
   "packages": [
@@ -108,6 +110,90 @@
       "tags": ["icons", "svg", "react"],
       "documentation": "https://lucide.dev/",
       "npm": "https://www.npmjs.com/package/lucide-react"
+    },
+    {
+      "id": "react-toastify",
+      "name": "React Toastify",
+      "description": "功能豐富的 Toast 通知庫",
+      "installCommand": "npm install react-toastify",
+      "category": "notification",
+      "tags": ["toast", "notification", "react"],
+      "documentation": "https://fkhadra.github.io/react-toastify/",
+      "npm": "https://www.npmjs.com/package/react-toastify",
+      "github": "https://github.com/fkhadra/react-toastify"
+    },
+    {
+      "id": "sonner",
+      "name": "Sonner",
+      "description": "現代化輕量 Toast 元件",
+      "installCommand": "npm install sonner",
+      "category": "notification",
+      "tags": ["toast", "notification", "lightweight"],
+      "documentation": "https://sonner.emilkowal.ski/",
+      "npm": "https://www.npmjs.com/package/sonner",
+      "github": "https://github.com/emilkowalski/sonner"
+    },
+    {
+      "id": "react-hot-toast",
+      "name": "React Hot Toast",
+      "description": "輕量級熱門 Toast 庫",
+      "installCommand": "npm install react-hot-toast",
+      "category": "notification",
+      "tags": ["toast", "notification", "lightweight"],
+      "documentation": "https://react-hot-toast.com/",
+      "npm": "https://www.npmjs.com/package/react-hot-toast"
+    },
+    {
+      "id": "dnd-kit",
+      "name": "@dnd-kit",
+      "description": "現代化拖放排序工具包",
+      "installCommand": "npm install @dnd-kit/core @dnd-kit/sortable @dnd-kit/utilities",
+      "category": "dnd",
+      "tags": ["drag-drop", "sortable", "react"],
+      "documentation": "https://dndkit.com/",
+      "npm": "https://www.npmjs.com/package/@dnd-kit/core",
+      "github": "https://github.com/clauderic/dnd-kit"
+    },
+    {
+      "id": "dayjs",
+      "name": "Day.js",
+      "description": "輕量級日期處理庫 (Moment.js 替代)",
+      "installCommand": "npm install dayjs",
+      "category": "utility",
+      "tags": ["date", "time", "lightweight"],
+      "documentation": "https://day.js.org/",
+      "npm": "https://www.npmjs.com/package/dayjs"
+    },
+    {
+      "id": "tailwind-merge",
+      "name": "tailwind-merge",
+      "description": "智慧合併 Tailwind CSS class",
+      "installCommand": "npm install tailwind-merge",
+      "category": "utility",
+      "tags": ["tailwind", "classname", "utility"],
+      "npm": "https://www.npmjs.com/package/tailwind-merge",
+      "github": "https://github.com/dcastil/tailwind-merge"
+    },
+    {
+      "id": "recharts",
+      "name": "Recharts",
+      "description": "React 圖表庫，基於 D3",
+      "installCommand": "npm install recharts",
+      "category": "ui",
+      "tags": ["charts", "data-visualization", "react"],
+      "documentation": "https://recharts.org/",
+      "npm": "https://www.npmjs.com/package/recharts"
+    },
+    {
+      "id": "prisma",
+      "name": "Prisma",
+      "description": "現代化 Node.js ORM",
+      "installCommand": "npm install prisma @prisma/client",
+      "category": "utility",
+      "tags": ["database", "orm", "typescript"],
+      "documentation": "https://www.prisma.io/docs",
+      "npm": "https://www.npmjs.com/package/prisma",
+      "github": "https://github.com/prisma/prisma"
     }
   ]
 }

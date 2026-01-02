@@ -1,0 +1,20 @@
+{
+  "name": "ui",
+  "displayName": "UI Toolkit",
+  "description": "UI 元件、動畫與圖標",
+  "icon": "🎨",
+  "extends": ["base"],
+  "packages": {
+    "dependencies": [
+      "framer-motion",
+      "lucide-react",
+      "react-toastify",
+      "sonner",
+      "class-variance-authority",
+      "@radix-ui/react-slot",
+      "@radix-ui/react-dialog",
+      "@radix-ui/react-dropdown-menu",
+      "@radix-ui/react-tooltip"
+    ]
+  }
+}

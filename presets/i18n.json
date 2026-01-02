@@ -1,0 +1,17 @@
+{
+  "name": "i18n",
+  "displayName": "Internationalization",
+  "description": "多國語言支援",
+  "icon": "🌐",
+  "packages": {
+    "dependencies": [
+      "i18next",
+      "react-i18next",
+      "i18next-browser-languagedetector"
+    ]
+  },
+  "configFiles": {
+    "src/i18n/index.ts": true,
+    "public/locales/": true
+  }
+}

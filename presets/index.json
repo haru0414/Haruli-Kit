@@ -1,0 +1,178 @@
+{
+  "version": "1.0.0",
+  "presets": [
+    {
+      "name": "haruli-theme",
+      "file": "haruli-theme.json",
+      "recommended": true,
+      "description": "武士風格 Tailwind 設計系統",
+      "category": "theme"
+    },
+    {
+      "name": "base",
+      "file": "base.json",
+      "recommended": true,
+      "description": "每個專案必裝的基礎套件",
+      "category": "core"
+    },
+    {
+      "name": "ui",
+      "file": "ui.json",
+      "description": "UI 元件、動畫與圖標",
+      "category": "frontend"
+    },
+    {
+      "name": "antd",
+      "file": "antd.json",
+      "description": "Ant Design UI 框架",
+      "category": "frontend"
+    },
+    {
+      "name": "form",
+      "file": "form.json",
+      "description": "表單驗證與處理",
+      "category": "frontend"
+    },
+    {
+      "name": "data",
+      "file": "data.json",
+      "description": "資料請求與狀態管理",
+      "category": "frontend"
+    },
+    {
+      "name": "router",
+      "file": "router.json",
+      "description": "路由管理 (SPA 專案)",
+      "category": "frontend"
+    },
+    {
+      "name": "utils",
+      "file": "utils.json",
+      "description": "常用工具函式庫",
+      "category": "core"
+    },
+    {
+      "name": "dnd",
+      "file": "dnd.json",
+      "description": "拖放排序功能",
+      "category": "frontend"
+    },
+    {
+      "name": "charts",
+      "file": "charts.json",
+      "description": "圖表與資料視覺化",
+      "category": "frontend"
+    },
+    {
+      "name": "calendar",
+      "file": "calendar.json",
+      "description": "行事曆與日期選擇器",
+      "category": "frontend"
+    },
+    {
+      "name": "carousel",
+      "file": "carousel.json",
+      "description": "輪播與滑動元件",
+      "category": "frontend"
+    },
+    {
+      "name": "animation",
+      "file": "animation.json",
+      "description": "進階動畫效果",
+      "category": "frontend"
+    },
+    {
+      "name": "markdown",
+      "file": "markdown.json",
+      "description": "Markdown 渲染與顯示",
+      "category": "frontend"
+    },
+    {
+      "name": "pdf",
+      "file": "pdf.json",
+      "description": "PDF 生成與列印",
+      "category": "feature"
+    },
+    {
+      "name": "i18n",
+      "file": "i18n.json",
+      "description": "多國語言支援",
+      "category": "feature"
+    },
+    {
+      "name": "backend",
+      "file": "backend.json",
+      "description": "Express.js 後端基礎",
+      "category": "backend"
+    },
+    {
+      "name": "auth",
+      "file": "auth.json",
+      "description": "認證與授權解決方案",
+      "category": "backend"
+    },
+    {
+      "name": "database",
+      "file": "database.json",
+      "description": "資料庫 ORM 與連接",
+      "category": "backend"
+    },
+    {
+      "name": "email",
+      "file": "email.json",
+      "description": "郵件發送功能",
+      "category": "backend"
+    },
+    {
+      "name": "storage",
+      "file": "storage.json",
+      "description": "AWS S3 檔案儲存",
+      "category": "backend"
+    },
+    {
+      "name": "scheduler",
+      "file": "scheduler.json",
+      "description": "排程任務與定時執行",
+      "category": "backend"
+    },
+    {
+      "name": "testing",
+      "file": "testing.json",
+      "description": "測試框架與工具",
+      "category": "dev"
+    },
+    {
+      "name": "dev",
+      "file": "dev.json",
+      "description": "開發與格式化工具",
+      "category": "dev"
+    },
+    {
+      "name": "full",
+      "file": "full.json",
+      "description": "完整開發套件組合",
+      "category": "bundle"
+    }
+  ],
+  "defaultPreset": "base",
+  "bundles": {
+    "minimal": ["base"],
+    "frontend": ["base", "ui", "form", "utils"],
+    "spa": ["base", "ui", "form", "data", "router", "utils"],
+    "dashboard": ["base", "ui", "form", "data", "charts", "dnd", "calendar"],
+    "crm": ["base", "ui", "form", "data", "router", "charts", "dnd", "calendar", "pdf", "utils"],
+    "fullstack": ["base", "ui", "form", "data", "auth", "database", "utils"],
+    "api": ["backend", "auth", "database", "email", "utils"],
+    "enterprise": ["base", "ui", "form", "data", "auth", "database", "i18n", "charts", "testing"],
+    "complete": ["base", "ui", "form", "data", "utils", "auth", "database", "testing", "dev"]
+  },
+  "categories": {
+    "theme": "設計系統",
+    "core": "核心套件",
+    "frontend": "前端開發",
+    "backend": "後端開發",
+    "feature": "功能擴展",
+    "dev": "開發工具",
+    "bundle": "組合包"
+  }
+}
