@@ -7,193 +7,231 @@
     { "id": "animation", "name": "動畫效果", "icon": "✨" },
     { "id": "utility", "name": "工具函式", "icon": "🔧" },
     { "id": "fetch", "name": "資料請求", "icon": "🌐" },
-    { "id": "dnd", "name": "拖放排序", "icon": "🎯" },
-    { "id": "testing", "name": "測試工具", "icon": "🧪" }
+    { "id": "dnd", "name": "拖放排序", "icon": "🎯" }
   ],
   "packages": [
     {
       "id": "tailwindcss",
       "name": "Tailwind CSS",
-      "description": "實用優先的 CSS 框架",
+      "description": "實用優先的 CSS 框架，直接在 HTML 中使用 utility classes",
       "installCommand": "npm install -D tailwindcss postcss autoprefixer",
       "category": "ui",
       "tags": ["css", "styling", "utility-first"],
       "documentation": "https://tailwindcss.com/docs",
       "npm": "https://www.npmjs.com/package/tailwindcss",
-      "github": "https://github.com/tailwindlabs/tailwindcss"
+      "github": "https://github.com/tailwindlabs/tailwindcss",
+      "demo": "// 直接在 className 中使用\n<div className=\"flex items-center gap-4 p-6 bg-slate-800 rounded-lg\">\n  <img className=\"w-12 h-12 rounded-full\" src=\"/avatar.jpg\" alt=\"\" />\n  <div>\n    <h3 className=\"text-lg font-bold text-white\">Username</h3>\n    <p className=\"text-slate-400\">Developer</p>\n  </div>\n</div>"
     },
     {
       "id": "framer-motion",
       "name": "Framer Motion",
-      "description": "React 動畫庫，簡單易用的 API",
+      "description": "React 動畫庫，簡單易用的 API，支援手勢與拖曳",
       "installCommand": "npm install framer-motion",
       "category": "animation",
       "tags": ["animation", "react", "motion"],
       "documentation": "https://www.framer.com/motion/",
-      "npm": "https://www.npmjs.com/package/framer-motion"
+      "npm": "https://www.npmjs.com/package/framer-motion",
+      "demo": "import { motion } from 'framer-motion';\n\nfunction AnimatedCard() {\n  return (\n    <motion.div\n      initial={{ opacity: 0, y: 20 }}\n      animate={{ opacity: 1, y: 0 }}\n      whileHover={{ scale: 1.05 }}\n      whileTap={{ scale: 0.95 }}\n      transition={{ duration: 0.3 }}\n      className=\"p-6 bg-slate-800 rounded-lg cursor-pointer\"\n    >\n      Hover me!\n    </motion.div>\n  );\n}"
     },
     {
       "id": "zustand",
       "name": "Zustand",
-      "description": "輕量級 React 狀態管理",
+      "description": "輕量級 React 狀態管理，比 Redux 更簡潔",
       "installCommand": "npm install zustand",
       "category": "state",
       "tags": ["state", "react", "lightweight"],
       "documentation": "https://docs.pmnd.rs/zustand",
-      "npm": "https://www.npmjs.com/package/zustand"
+      "npm": "https://www.npmjs.com/package/zustand",
+      "demo": "import { create } from 'zustand';\n\n// 建立 store\nconst useStore = create((set) => ({\n  count: 0,\n  increment: () => set((state) => ({ count: state.count + 1 })),\n  decrement: () => set((state) => ({ count: state.count - 1 })),\n}));\n\n// 在元件中使用\nfunction Counter() {\n  const { count, increment, decrement } = useStore();\n  return (\n    <div>\n      <span>{count}</span>\n      <button onClick={increment}>+</button>\n      <button onClick={decrement}>-</button>\n    </div>\n  );\n}"
     },
     {
       "id": "react-hook-form",
       "name": "React Hook Form",
-      "description": "高效能表單驗證庫",
+      "description": "高效能表單驗證庫，減少不必要的重新渲染",
       "installCommand": "npm install react-hook-form",
       "category": "form",
       "tags": ["form", "validation", "react"],
       "documentation": "https://react-hook-form.com/",
-      "npm": "https://www.npmjs.com/package/react-hook-form"
+      "npm": "https://www.npmjs.com/package/react-hook-form",
+      "demo": "import { useForm } from 'react-hook-form';\n\nfunction LoginForm() {\n  const { register, handleSubmit, formState: { errors } } = useForm();\n\n  const onSubmit = (data) => console.log(data);\n\n  return (\n    <form onSubmit={handleSubmit(onSubmit)}>\n      <input {...register('email', { required: '必填' })} />\n      {errors.email && <span>{errors.email.message}</span>}\n      \n      <input {...register('password', { minLength: 6 })} type=\"password\" />\n      \n      <button type=\"submit\">登入</button>\n    </form>\n  );\n}"
     },
     {
       "id": "zod",
       "name": "Zod",
-      "description": "TypeScript-first schema 驗證",
+      "description": "TypeScript-first schema 驗證，完美搭配 React Hook Form",
       "installCommand": "npm install zod",
       "category": "form",
       "tags": ["validation", "typescript", "schema"],
       "documentation": "https://zod.dev/",
-      "npm": "https://www.npmjs.com/package/zod"
+      "npm": "https://www.npmjs.com/package/zod",
+      "demo": "import { z } from 'zod';\n\n// 定義 schema\nconst userSchema = z.object({\n  name: z.string().min(2, '名字至少 2 個字'),\n  email: z.string().email('請輸入有效的 email'),\n  age: z.number().min(18, '必須年滿 18 歲'),\n});\n\n// 驗證資料\nconst result = userSchema.safeParse({\n  name: 'John',\n  email: 'john@example.com',\n  age: 25,\n});\n\nif (result.success) {\n  console.log(result.data); // 型別安全!\n} else {\n  console.log(result.error.issues);\n}"
     },
     {
       "id": "axios",
       "name": "Axios",
-      "description": "Promise-based HTTP 客戶端",
+      "description": "Promise-based HTTP 客戶端，支援攔截器與取消請求",
       "installCommand": "npm install axios",
       "category": "fetch",
       "tags": ["http", "request", "promise"],
       "documentation": "https://axios-http.com/",
-      "npm": "https://www.npmjs.com/package/axios"
+      "npm": "https://www.npmjs.com/package/axios",
+      "demo": "import axios from 'axios';\n\n// 建立實例\nconst api = axios.create({\n  baseURL: 'https://api.example.com',\n  timeout: 5000,\n});\n\n// GET 請求\nconst { data } = await api.get('/users');\n\n// POST 請求\nconst response = await api.post('/users', {\n  name: 'John',\n  email: 'john@example.com',\n});\n\n// 攔截器\napi.interceptors.request.use((config) => {\n  config.headers.Authorization = `Bearer ${token}`;\n  return config;\n});"
     },
     {
       "id": "tanstack-query",
       "name": "TanStack Query",
-      "description": "強大的資料同步與快取",
+      "description": "強大的資料同步與快取，自動重新請求與背景更新",
       "installCommand": "npm install @tanstack/react-query",
       "category": "fetch",
       "tags": ["data-fetching", "cache", "react"],
       "documentation": "https://tanstack.com/query",
-      "npm": "https://www.npmjs.com/package/@tanstack/react-query"
+      "npm": "https://www.npmjs.com/package/@tanstack/react-query",
+      "demo": "import { useQuery, useMutation } from '@tanstack/react-query';\n\n// 查詢資料\nfunction UserList() {\n  const { data, isLoading, error } = useQuery({\n    queryKey: ['users'],\n    queryFn: () => fetch('/api/users').then(res => res.json()),\n  });\n\n  if (isLoading) return <div>Loading...</div>;\n  if (error) return <div>Error!</div>;\n  return <ul>{data.map(user => <li key={user.id}>{user.name}</li>)}</ul>;\n}\n\n// 變更資料\nconst mutation = useMutation({\n  mutationFn: (newUser) => fetch('/api/users', { method: 'POST', body: JSON.stringify(newUser) }),\n});"
     },
     {
       "id": "clsx",
       "name": "clsx",
-      "description": "條件式 className 工具",
+      "description": "條件式 className 工具，輕鬆組合 class names",
       "installCommand": "npm install clsx",
       "category": "utility",
       "tags": ["classname", "utility"],
-      "npm": "https://www.npmjs.com/package/clsx"
+      "npm": "https://www.npmjs.com/package/clsx",
+      "demo": "import clsx from 'clsx';\n\n// 條件式 class\nclsx('btn', isActive && 'btn-active');\n// => 'btn btn-active' 或 'btn'\n\n// 物件語法\nclsx({\n  'btn': true,\n  'btn-primary': variant === 'primary',\n  'btn-disabled': disabled,\n});\n\n// 搭配 Tailwind\nfunction Button({ variant, size, className }) {\n  return (\n    <button className={clsx(\n      'rounded-lg font-bold',\n      variant === 'primary' && 'bg-blue-500 text-white',\n      variant === 'ghost' && 'bg-transparent',\n      size === 'sm' && 'px-2 py-1 text-sm',\n      className\n    )} />\n  );\n}"
     },
     {
       "id": "date-fns",
       "name": "date-fns",
-      "description": "現代 JavaScript 日期工具庫",
+      "description": "現代 JavaScript 日期工具庫，支援 tree-shaking",
       "installCommand": "npm install date-fns",
       "category": "utility",
       "tags": ["date", "time", "utility"],
       "documentation": "https://date-fns.org/",
-      "npm": "https://www.npmjs.com/package/date-fns"
+      "npm": "https://www.npmjs.com/package/date-fns",
+      "demo": "import { format, formatDistance, addDays, isAfter } from 'date-fns';\nimport { zhTW } from 'date-fns/locale';\n\n// 格式化日期\nformat(new Date(), 'yyyy/MM/dd HH:mm');\n// => '2024/01/15 14:30'\n\n// 相對時間\nformatDistance(new Date(), addDays(new Date(), 3), { locale: zhTW });\n// => '3 天'\n\n// 日期運算\nconst nextWeek = addDays(new Date(), 7);\n\n// 日期比較\nisAfter(new Date(), new Date('2023-01-01'));\n// => true"
     },
     {
       "id": "lucide-react",
       "name": "Lucide React",
-      "description": "精美的開源圖標庫",
+      "description": "精美的開源圖標庫，1000+ 圖示，支援自訂大小與顏色",
       "installCommand": "npm install lucide-react",
       "category": "ui",
       "tags": ["icons", "svg", "react"],
       "documentation": "https://lucide.dev/",
-      "npm": "https://www.npmjs.com/package/lucide-react"
-    },
-    {
-      "id": "react-toastify",
-      "name": "React Toastify",
-      "description": "功能豐富的 Toast 通知庫",
-      "installCommand": "npm install react-toastify",
-      "category": "notification",
-      "tags": ["toast", "notification", "react"],
-      "documentation": "https://fkhadra.github.io/react-toastify/",
-      "npm": "https://www.npmjs.com/package/react-toastify",
-      "github": "https://github.com/fkhadra/react-toastify"
+      "npm": "https://www.npmjs.com/package/lucide-react",
+      "demo": "import { Home, Settings, User, Search, Menu, X } from 'lucide-react';\n\n// 基本使用\n<Home className=\"w-6 h-6\" />\n\n// 自訂顏色與大小\n<Settings className=\"w-8 h-8 text-orange-400\" />\n\n// 在按鈕中使用\n<button className=\"flex items-center gap-2\">\n  <Search className=\"w-4 h-4\" />\n  搜尋\n</button>\n\n// strokeWidth 調整粗細\n<Menu strokeWidth={1.5} className=\"w-6 h-6\" />"
     },
     {
       "id": "sonner",
       "name": "Sonner",
-      "description": "現代化輕量 Toast 元件",
+      "description": "現代化輕量 Toast 元件，支援 Promise、自訂樣式",
       "installCommand": "npm install sonner",
       "category": "notification",
       "tags": ["toast", "notification", "lightweight"],
       "documentation": "https://sonner.emilkowal.ski/",
       "npm": "https://www.npmjs.com/package/sonner",
-      "github": "https://github.com/emilkowalski/sonner"
+      "github": "https://github.com/emilkowalski/sonner",
+      "demo": "import { Toaster, toast } from 'sonner';\n\n// 在 App 根層加入 Toaster\nfunction App() {\n  return (\n    <>\n      <Toaster position=\"top-right\" richColors />\n      <YourApp />\n    </>\n  );\n}\n\n// 使用 toast\ntoast.success('儲存成功!');\ntoast.error('發生錯誤');\ntoast.loading('載入中...');\n\n// Promise toast\ntoast.promise(saveData(), {\n  loading: '儲存中...',\n  success: '儲存成功!',\n  error: '儲存失敗',\n});"
     },
     {
       "id": "react-hot-toast",
       "name": "React Hot Toast",
-      "description": "輕量級熱門 Toast 庫",
+      "description": "輕量級熱門 Toast 庫，支援自訂動畫與樣式",
       "installCommand": "npm install react-hot-toast",
       "category": "notification",
       "tags": ["toast", "notification", "lightweight"],
       "documentation": "https://react-hot-toast.com/",
-      "npm": "https://www.npmjs.com/package/react-hot-toast"
+      "npm": "https://www.npmjs.com/package/react-hot-toast",
+      "demo": "import toast, { Toaster } from 'react-hot-toast';\n\n// 在 App 加入 Toaster\n<Toaster position=\"top-center\" />\n\n// 基本用法\ntoast('Hello World');\ntoast.success('成功!');\ntoast.error('錯誤!');\n\n// 自訂樣式\ntoast('Custom', {\n  icon: '🔥',\n  style: {\n    background: '#1e293b',\n    color: '#fff',\n  },\n});\n\n// Promise\ntoast.promise(fetchData(), {\n  loading: 'Loading...',\n  success: 'Done!',\n  error: 'Error!',\n});"
     },
     {
       "id": "dnd-kit",
       "name": "@dnd-kit",
-      "description": "現代化拖放排序工具包",
-      "installCommand": "npm install @dnd-kit/core @dnd-kit/sortable @dnd-kit/utilities",
+      "description": "現代化拖放排序工具包，支援觸控與鍵盤操作",
+      "installCommand": "npm install @dnd-kit/core @dnd-kit/sortable",
       "category": "dnd",
       "tags": ["drag-drop", "sortable", "react"],
       "documentation": "https://dndkit.com/",
       "npm": "https://www.npmjs.com/package/@dnd-kit/core",
-      "github": "https://github.com/clauderic/dnd-kit"
+      "github": "https://github.com/clauderic/dnd-kit",
+      "demo": "import { DndContext, closestCenter } from '@dnd-kit/core';\nimport { SortableContext, useSortable, verticalListSortingStrategy } from '@dnd-kit/sortable';\n\nfunction SortableItem({ id }) {\n  const { attributes, listeners, setNodeRef, transform } = useSortable({ id });\n  return (\n    <div ref={setNodeRef} {...attributes} {...listeners}>\n      {id}\n    </div>\n  );\n}\n\nfunction SortableList({ items }) {\n  return (\n    <DndContext collisionDetection={closestCenter}>\n      <SortableContext items={items} strategy={verticalListSortingStrategy}>\n        {items.map(id => <SortableItem key={id} id={id} />)}\n      </SortableContext>\n    </DndContext>\n  );\n}"
     },
     {
       "id": "dayjs",
       "name": "Day.js",
-      "description": "輕量級日期處理庫 (Moment.js 替代)",
+      "description": "輕量級日期處理庫 (2KB)，API 與 Moment.js 相似",
       "installCommand": "npm install dayjs",
       "category": "utility",
       "tags": ["date", "time", "lightweight"],
       "documentation": "https://day.js.org/",
-      "npm": "https://www.npmjs.com/package/dayjs"
+      "npm": "https://www.npmjs.com/package/dayjs",
+      "demo": "import dayjs from 'dayjs';\nimport relativeTime from 'dayjs/plugin/relativeTime';\nimport 'dayjs/locale/zh-tw';\n\ndayjs.extend(relativeTime);\ndayjs.locale('zh-tw');\n\n// 格式化\ndayjs().format('YYYY-MM-DD HH:mm');\n// => '2024-01-15 14:30'\n\n// 相對時間\ndayjs('2024-01-01').fromNow();\n// => '2 週前'\n\n// 日期運算\ndayjs().add(7, 'day').format('MM/DD');\n\n// 比較\ndayjs().isAfter(dayjs('2023-01-01'));"
     },
     {
       "id": "tailwind-merge",
       "name": "tailwind-merge",
-      "description": "智慧合併 Tailwind CSS class",
+      "description": "智慧合併 Tailwind CSS class，解決衝突問題",
       "installCommand": "npm install tailwind-merge",
       "category": "utility",
       "tags": ["tailwind", "classname", "utility"],
       "npm": "https://www.npmjs.com/package/tailwind-merge",
-      "github": "https://github.com/dcastil/tailwind-merge"
+      "github": "https://github.com/dcastil/tailwind-merge",
+      "demo": "import { twMerge } from 'tailwind-merge';\nimport clsx from 'clsx';\n\n// 智慧合併，後者覆蓋前者\ntwMerge('px-4 py-2', 'px-6');\n// => 'py-2 px-6' (px-4 被覆蓋)\n\n// 搭配 clsx 使用 (推薦)\nfunction cn(...inputs) {\n  return twMerge(clsx(inputs));\n}\n\n// 元件使用\nfunction Button({ className, ...props }) {\n  return (\n    <button\n      className={cn(\n        'px-4 py-2 bg-blue-500 rounded',\n        className // 允許外部覆蓋\n      )}\n      {...props}\n    />\n  );\n}"
     },
     {
       "id": "recharts",
       "name": "Recharts",
-      "description": "React 圖表庫，基於 D3",
+      "description": "React 圖表庫，基於 D3，支援響應式設計",
       "installCommand": "npm install recharts",
       "category": "ui",
       "tags": ["charts", "data-visualization", "react"],
       "documentation": "https://recharts.org/",
-      "npm": "https://www.npmjs.com/package/recharts"
+      "npm": "https://www.npmjs.com/package/recharts",
+      "demo": "import { LineChart, Line, XAxis, YAxis, Tooltip, ResponsiveContainer } from 'recharts';\n\nconst data = [\n  { name: 'Jan', value: 400 },\n  { name: 'Feb', value: 300 },\n  { name: 'Mar', value: 600 },\n];\n\nfunction Chart() {\n  return (\n    <ResponsiveContainer width=\"100%\" height={300}>\n      <LineChart data={data}>\n        <XAxis dataKey=\"name\" />\n        <YAxis />\n        <Tooltip />\n        <Line type=\"monotone\" dataKey=\"value\" stroke=\"#f97316\" strokeWidth={2} />\n      </LineChart>\n    </ResponsiveContainer>\n  );\n}"
     },
     {
       "id": "prisma",
       "name": "Prisma",
-      "description": "現代化 Node.js ORM",
+      "description": "現代化 Node.js ORM，型別安全的資料庫操作",
       "installCommand": "npm install prisma @prisma/client",
       "category": "utility",
       "tags": ["database", "orm", "typescript"],
       "documentation": "https://www.prisma.io/docs",
       "npm": "https://www.npmjs.com/package/prisma",
-      "github": "https://github.com/prisma/prisma"
+      "github": "https://github.com/prisma/prisma",
+      "demo": "// prisma/schema.prisma\nmodel User {\n  id    Int     @id @default(autoincrement())\n  email String  @unique\n  name  String?\n  posts Post[]\n}\n\n// 使用 Prisma Client\nimport { PrismaClient } from '@prisma/client';\nconst prisma = new PrismaClient();\n\n// 查詢\nconst users = await prisma.user.findMany();\n\n// 新增\nconst user = await prisma.user.create({\n  data: { email: 'test@example.com', name: 'Test' },\n});\n\n// 關聯查詢\nconst userWithPosts = await prisma.user.findUnique({\n  where: { id: 1 },\n  include: { posts: true },\n});"
+    },
+    {
+      "id": "swr",
+      "name": "SWR",
+      "description": "Vercel 推出的資料請求 Hook，支援快取與重新驗證",
+      "installCommand": "npm install swr",
+      "category": "fetch",
+      "tags": ["data-fetching", "cache", "vercel"],
+      "documentation": "https://swr.vercel.app/",
+      "npm": "https://www.npmjs.com/package/swr",
+      "demo": "import useSWR from 'swr';\n\nconst fetcher = (url) => fetch(url).then(res => res.json());\n\nfunction Profile() {\n  const { data, error, isLoading } = useSWR('/api/user', fetcher);\n\n  if (isLoading) return <div>Loading...</div>;\n  if (error) return <div>Error</div>;\n  return <div>Hello, {data.name}!</div>;\n}\n\n// 條件式請求\nconst { data } = useSWR(userId ? `/api/user/${userId}` : null, fetcher);\n\n// 變更後重新驗證\nimport { mutate } from 'swr';\nmutate('/api/user');"
+    },
+    {
+      "id": "jotai",
+      "name": "Jotai",
+      "description": "原子化狀態管理，比 Zustand 更細粒度",
+      "installCommand": "npm install jotai",
+      "category": "state",
+      "tags": ["state", "atomic", "react"],
+      "documentation": "https://jotai.org/",
+      "npm": "https://www.npmjs.com/package/jotai",
+      "demo": "import { atom, useAtom } from 'jotai';\n\n// 定義 atom\nconst countAtom = atom(0);\nconst doubleAtom = atom((get) => get(countAtom) * 2);\n\n// 使用\nfunction Counter() {\n  const [count, setCount] = useAtom(countAtom);\n  const [double] = useAtom(doubleAtom);\n\n  return (\n    <div>\n      <p>Count: {count}</p>\n      <p>Double: {double}</p>\n      <button onClick={() => setCount(c => c + 1)}>+1</button>\n    </div>\n  );\n}"
+    },
+    {
+      "id": "cmdk",
+      "name": "cmdk",
+      "description": "Command Menu 元件，類似 Spotlight/⌘K 搜尋",
+      "installCommand": "npm install cmdk",
+      "category": "ui",
+      "tags": ["command-palette", "search", "keyboard"],
+      "documentation": "https://cmdk.paco.me/",
+      "npm": "https://www.npmjs.com/package/cmdk",
+      "demo": "import { Command } from 'cmdk';\n\nfunction CommandMenu() {\n  return (\n    <Command>\n      <Command.Input placeholder=\"搜尋...\" />\n      <Command.List>\n        <Command.Empty>找不到結果</Command.Empty>\n        <Command.Group heading=\"導航\">\n          <Command.Item onSelect={() => router.push('/')}>首頁</Command.Item>\n          <Command.Item onSelect={() => router.push('/docs')}>文件</Command.Item>\n        </Command.Group>\n        <Command.Separator />\n        <Command.Group heading=\"設定\">\n          <Command.Item>主題</Command.Item>\n          <Command.Item>帳號</Command.Item>\n        </Command.Group>\n      </Command.List>\n    </Command>\n  );\n}"
     }
   ]
 }
