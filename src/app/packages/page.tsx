@@ -1,8 +1,10 @@
 "use client";
 
 import { useState, useMemo } from "react";
-import { ExternalLink, Github, Book, Copy, Check, Code, ChevronDown, ChevronUp } from "lucide-react";
+import { ExternalLink, Github, Book, Copy, Check, Code, ChevronDown, ChevronUp, Heart } from "lucide-react";
 import { Highlight, themes } from "prism-react-renderer";
+import { useToast } from "@/components/ui/toast";
+import { useFavorites } from "@/hooks/use-favorites";
 import packagesData from "@/data/packages.json";
 
 export default function PackagesPage() {
@@ -10,6 +12,17 @@ export default function PackagesPage() {
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
   const [copiedId, setCopiedId] = useState<string | null>(null);
   const [expandedId, setExpandedId] = useState<string | null>(null);
+  const [showFavoritesOnly, setShowFavoritesOnly] = useState(false);
+  const { showToast } = useToast();
+  const { toggleFavorite, isFavorite, getFavoritesByType } = useFavorites();
+
+  const handleToggleFavorite = (id: string) => {
+    const wasFavorite = isFavorite(id, "package");
+    toggleFavorite(id, "package");
+    showToast(wasFavorite ? "已取消收藏" : "已加入收藏");
+  };
+
+  const favoritePackageIds = getFavoritesByType("package").map((f) => f.id);
 
   const filteredPackages = useMemo(() => {
     return packagesData.packages.filter((pkg) => {
@@ -18,17 +31,20 @@ export default function PackagesPage() {
         pkg.description.toLowerCase().includes(search.toLowerCase()) ||
         pkg.tags.some((tag) => tag.toLowerCase().includes(search.toLowerCase()));
       const matchesCategory = !selectedCategory || pkg.category === selectedCategory;
-      return matchesSearch && matchesCategory;
+      const matchesFavorite = !showFavoritesOnly || favoritePackageIds.includes(pkg.id);
+      return matchesSearch && matchesCategory && matchesFavorite;
     });
-  }, [search, selectedCategory]);
+  }, [search, selectedCategory, showFavoritesOnly, favoritePackageIds]);
 
   const handleCopy = async (id: string, text: string) => {
     try {
       await navigator.clipboard.writeText(text);
       setCopiedId(id);
+      showToast("已複製到剪貼簿");
       setTimeout(() => setCopiedId(null), 2000);
     } catch (err) {
       console.error("Failed to copy:", err);
+      showToast("複製失敗", "error");
     }
   };
 
@@ -56,6 +72,21 @@ export default function PackagesPage() {
           />
         </div>
         <div className="flex flex-wrap gap-2">
+          <button
+            onClick={() => setShowFavoritesOnly(!showFavoritesOnly)}
+            className={`px-4 py-2 font-mono text-sm transition-all cursor-pointer cut-corners-sm flex items-center gap-2 ${
+              showFavoritesOnly
+                ? "bg-red-400 text-slate-900"
+                : "bg-slate-800 text-slate-400 border border-slate-700 hover:border-red-400"
+            }`}
+          >
+            <Heart className="w-3.5 h-3.5" fill={showFavoritesOnly ? "currentColor" : "none"} />
+            {favoritePackageIds.length > 0 && (
+              <span className={`text-xs ${showFavoritesOnly ? "text-slate-900" : "text-slate-500"}`}>
+                {favoritePackageIds.length}
+              </span>
+            )}
+          </button>
           <button
             onClick={() => setSelectedCategory(null)}
             className={`px-4 py-2 font-mono text-sm transition-all cursor-pointer cut-corners-sm ${
@@ -96,6 +127,20 @@ export default function PackagesPage() {
                   {pkg.name}
                 </h3>
                 <div className="flex gap-1">
+                  <button
+                    onClick={() => handleToggleFavorite(pkg.id)}
+                    className={`p-1.5 transition-colors cursor-pointer ${
+                      isFavorite(pkg.id, "package")
+                        ? "text-red-400 hover:text-red-300"
+                        : "text-slate-500 hover:text-red-400"
+                    }`}
+                    title={isFavorite(pkg.id, "package") ? "取消收藏" : "加入收藏"}
+                  >
+                    <Heart
+                      className="w-4 h-4"
+                      fill={isFavorite(pkg.id, "package") ? "currentColor" : "none"}
+                    />
+                  </button>
                   {pkg.documentation && (
                     <a
                       href={pkg.documentation}

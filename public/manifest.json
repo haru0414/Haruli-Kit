@@ -1,0 +1,26 @@
+{
+  "name": "Haruli Kit",
+  "short_name": "Haruli",
+  "description": "專為現代開發者打造的個人軍火庫。收集最常用的套件、Hooks 與 UI 元件。",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#0F172A",
+  "theme_color": "#F97316",
+  "orientation": "portrait-primary",
+  "icons": [
+    {
+      "src": "/haru-logo.jpg",
+      "sizes": "192x192",
+      "type": "image/jpeg",
+      "purpose": "any"
+    },
+    {
+      "src": "/haru-logo.jpg",
+      "sizes": "512x512",
+      "type": "image/jpeg",
+      "purpose": "any"
+    }
+  ],
+  "categories": ["developer tools", "productivity"],
+  "lang": "zh-TW"
+}

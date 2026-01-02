@@ -3,6 +3,7 @@
 import { useState, useMemo } from "react";
 import { Copy, Check, ChevronDown, ChevronUp } from "lucide-react";
 import { Highlight, themes } from "prism-react-renderer";
+import { useToast } from "@/components/ui/toast";
 import snippetsData from "@/data/snippets.json";
 
 export default function SnippetsPage() {
@@ -10,6 +11,7 @@ export default function SnippetsPage() {
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
   const [expandedSnippet, setExpandedSnippet] = useState<string | null>(null);
   const [copiedId, setCopiedId] = useState<string | null>(null);
+  const { showToast } = useToast();
 
   const filteredSnippets = useMemo(() => {
     return snippetsData.snippets.filter((snippet) => {
@@ -23,9 +25,15 @@ export default function SnippetsPage() {
   }, [search, selectedCategory]);
 
   const handleCopy = async (id: string, code: string) => {
-    await navigator.clipboard.writeText(code);
-    setCopiedId(id);
-    setTimeout(() => setCopiedId(null), 2000);
+    try {
+      await navigator.clipboard.writeText(code);
+      setCopiedId(id);
+      showToast("已複製到剪貼簿");
+      setTimeout(() => setCopiedId(null), 2000);
+    } catch (err) {
+      console.error("Failed to copy:", err);
+      showToast("複製失敗", "error");
+    }
   };
 
   return (

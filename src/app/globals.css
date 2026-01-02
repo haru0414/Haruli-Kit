@@ -1,8 +1,9 @@
 @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap');
 @import "tailwindcss";
 
-:root {
-  /* Samurai Color Palette */
+:root,
+.dark {
+  /* Samurai Color Palette - Dark Mode */
   --background: #0F172A;           /* 夜幕深藍 Slate-900 */
   --surface: #1E293B;              /* 武士服青 Slate-800 */
   --surface-hover: #334155;        /* Slate-700 */
@@ -23,6 +24,38 @@
   --hard-shadow: 4px 4px 0px var(--primary);
   --hard-shadow-sm: 2px 2px 0px var(--primary);
   --hard-shadow-hover: 2px 2px 0px var(--primary);
+
+  /* Code colors */
+  --code-bg: #0F172A;
+  --code-border: #334155;
+}
+
+.light {
+  /* Samurai Color Palette - Light Mode */
+  --background: #F8FAFC;           /* Slate-50 */
+  --surface: #FFFFFF;              /* White */
+  --surface-hover: #F1F5F9;        /* Slate-100 */
+  --border: #E2E8F0;               /* Slate-200 */
+
+  --primary: #EA580C;              /* Orange-600 (slightly darker for light mode) */
+  --primary-light: #F97316;        /* Orange-500 */
+  --primary-glow: rgba(234, 88, 12, 0.2);
+
+  --accent-blue: #0284C7;          /* Sky-600 */
+  --accent-yellow: #F59E0B;        /* Amber-500 */
+
+  --foreground: #0F172A;           /* Slate-900 */
+  --muted: #64748B;                /* Slate-500 */
+  --muted-dark: #94A3B8;           /* Slate-400 */
+
+  /* Shadows */
+  --hard-shadow: 4px 4px 0px var(--primary);
+  --hard-shadow-sm: 2px 2px 0px var(--primary);
+  --hard-shadow-hover: 2px 2px 0px var(--primary);
+
+  /* Code colors */
+  --code-bg: #1E293B;
+  --code-border: #334155;
 }
 
 @theme inline {
@@ -53,6 +86,18 @@ body {
   color: var(--foreground);
   font-family: 'Space Grotesk', system-ui, sans-serif;
   min-height: 100vh;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Light mode specific overrides */
+.light .ronin-sun {
+  opacity: 0.08;
+  background: linear-gradient(180deg, #F97316 0%, #DC2626 100%);
+}
+
+.light .grid-bg {
+  background-image: linear-gradient(rgba(148, 163, 184, 0.1) 1px, transparent 1px),
+                    linear-gradient(90deg, rgba(148, 163, 184, 0.1) 1px, transparent 1px);
 }
 
 /* Selection */
