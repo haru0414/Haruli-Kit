@@ -1,42 +1,93 @@
 "use client";
 
-import { useState, useMemo } from "react";
+import { useState } from "react";
 import {
   Sparkles,
-  Palette,
-  Layout,
-  Wrench,
   ExternalLink,
   Copy,
   Check,
   Star,
   Terminal,
+  Zap,
 } from "lucide-react";
-import resourcesData from "@/data/resources.json";
 
-const iconMap: Record<string, React.ComponentType<{ className?: string }>> = {
-  Sparkles,
-  Palette,
-  Layout,
-  Wrench,
-};
+const vibeTools = [
+  {
+    id: "claude-code",
+    name: "Claude Code",
+    description: "Anthropic 官方 CLI 工具，讓 Claude 直接在終端機協助你寫程式",
+    url: "https://docs.anthropic.com/en/docs/claude-code",
+    tags: ["cli", "anthropic", "terminal"],
+    featured: true,
+    installCommand: "npm install -g @anthropic-ai/claude-code",
+  },
+  {
+    id: "ui-ux-pro-max",
+    name: "UI/UX Pro Max",
+    description: "AI 驅動的 UI/UX 設計智能工具，提供 50+ 設計風格、21 配色方案、50 字體配對",
+    url: "https://ui-ux-pro-max-skill.nextlevelbuilder.io/",
+    tags: ["design", "ui-ux", "claude-skill"],
+    featured: true,
+  },
+  {
+    id: "google-pomelli",
+    name: "Google Pomelli",
+    description: "Google Labs 推出的 AI 設計原型工具，快速生成 UI 概念",
+    url: "https://labs.google.com/pomelli/about/",
+    tags: ["google", "prototyping", "design"],
+    featured: true,
+  },
+  {
+    id: "lingyun-vibe-coding",
+    name: "LingYun Vibe Coding Style Generator",
+    description: "Vibe Coding 風格生成器，根據描述自動生成程式碼風格",
+    url: "https://github.com/akseolabs-seo/LingYun-Vibe-Coding-Style-Generator",
+    tags: ["code-style", "generator", "open-source"],
+    featured: true,
+  },
+  {
+    id: "v0-dev",
+    name: "v0.dev",
+    description: "Vercel 推出的 AI UI 生成工具，用自然語言描述生成 React 元件",
+    url: "https://v0.dev/",
+    tags: ["vercel", "react", "generator"],
+    featured: true,
+  },
+  {
+    id: "bolt-new",
+    name: "bolt.new",
+    description: "StackBlitz 推出的 AI 全端開發環境，在瀏覽器中即時預覽",
+    url: "https://bolt.new/",
+    tags: ["fullstack", "browser-ide", "stackblitz"],
+    featured: true,
+  },
+  {
+    id: "cursor",
+    name: "Cursor",
+    description: "AI-first 程式碼編輯器，基於 VSCode 內建強大 AI 助手",
+    url: "https://cursor.sh/",
+    tags: ["editor", "ide", "vscode"],
+  },
+  {
+    id: "windsurf",
+    name: "Windsurf",
+    description: "Codeium 推出的 AI 編輯器，強調流暢的開發體驗",
+    url: "https://codeium.com/windsurf",
+    tags: ["editor", "ide", "codeium"],
+  },
+];
 
 export default function VibePage() {
-  const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
   const [copiedId, setCopiedId] = useState<string | null>(null);
-
-  const filteredResources = useMemo(() => {
-    if (!selectedCategory) return resourcesData.resources;
-    return resourcesData.resources.filter((r) => r.category === selectedCategory);
-  }, [selectedCategory]);
-
-  const featuredResources = resourcesData.resources.filter((r) => r.featured);
 
   const handleCopy = async (id: string, command: string) => {
     await navigator.clipboard.writeText(command);
     setCopiedId(id);
     setTimeout(() => setCopiedId(null), 2000);
   };
+
+  const featuredTools = vibeTools.filter((t) => t.featured);
+  const otherTools = vibeTools.filter((t) => !t.featured);
 
   return (
     <div className="max-w-7xl mx-auto px-6 py-12">
@@ -57,16 +108,12 @@ export default function VibePage() {
             Vibe <span className="text-orange-400">Coding</span>
           </h1>
           <p className="text-xl text-slate-400 max-w-2xl mb-8">
-            AI 驅動的設計與開發工具精選。讓你的開發體驗提升到新境界。
+            AI 驅動的開發工具精選。用自然語言寫程式，讓 AI 成為你的結對夥伴。
           </p>
           <div className="flex flex-wrap gap-4">
             <div className="flex items-center gap-2 px-4 py-2 bg-slate-800 border border-slate-700 font-mono text-sm">
-              <Star className="w-4 h-4 text-orange-400" />
-              <span>{featuredResources.length} 精選工具</span>
-            </div>
-            <div className="flex items-center gap-2 px-4 py-2 bg-slate-800 border border-slate-700 font-mono text-sm">
-              <Layout className="w-4 h-4 text-cyan-400" />
-              <span>{resourcesData.categories.length} 分類</span>
+              <Zap className="w-4 h-4 text-orange-400" />
+              <span>{vibeTools.length} AI 工具</span>
             </div>
           </div>
         </div>
@@ -81,121 +128,23 @@ export default function VibePage() {
           </h2>
         </div>
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {featuredResources.map((resource) => (
-            <a
-              key={resource.id}
-              href={resource.url}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="group relative bg-gradient-to-br from-slate-800 to-slate-800/50 border-2 border-orange-400/30 hover:border-orange-400 cut-corners p-6 transition-all hover:shadow-lg hover:shadow-orange-400/10"
-            >
-              <div className="absolute top-3 right-3">
-                <Star className="w-4 h-4 text-orange-400 fill-orange-400" />
-              </div>
-              <h3 className="text-lg font-bold mb-2 group-hover:text-orange-400 transition-colors">
-                {resource.name}
-              </h3>
-              <p className="text-sm text-slate-400 mb-4 line-clamp-2">
-                {resource.description}
-              </p>
-              <div className="flex flex-wrap gap-2 mb-4">
-                {resource.tags.slice(0, 3).map((tag) => (
-                  <span
-                    key={tag}
-                    className="px-2 py-0.5 text-xs font-mono bg-slate-700/50 text-slate-300"
-                  >
-                    {tag}
-                  </span>
-                ))}
-              </div>
-              <div className="flex items-center gap-2 text-orange-400 text-sm font-mono">
-                <ExternalLink className="w-4 h-4" />
-                <span>前往使用</span>
-              </div>
-            </a>
-          ))}
-        </div>
-      </section>
-
-      {/* Category Filter */}
-      <section className="mb-8">
-        <div className="flex flex-wrap gap-3">
-          <button
-            onClick={() => setSelectedCategory(null)}
-            className={`flex items-center gap-2 px-5 py-3 font-mono text-sm uppercase tracking-wide transition-all cursor-pointer cut-corners ${
-              !selectedCategory
-                ? "bg-orange-400 text-slate-900"
-                : "bg-slate-800 text-slate-400 border border-slate-700 hover:border-orange-400"
-            }`}
-          >
-            ALL
-          </button>
-          {resourcesData.categories.map((category) => {
-            const IconComponent = iconMap[category.icon] || Sparkles;
-            return (
-              <button
-                key={category.id}
-                onClick={() => setSelectedCategory(category.id)}
-                className={`flex items-center gap-2 px-5 py-3 font-mono text-sm uppercase tracking-wide transition-all cursor-pointer cut-corners ${
-                  selectedCategory === category.id
-                    ? "bg-orange-400 text-slate-900"
-                    : "bg-slate-800 text-slate-400 border border-slate-700 hover:border-orange-400"
-                }`}
-              >
-                <IconComponent className="w-4 h-4" />
-                {category.name}
-              </button>
-            );
-          })}
-        </div>
-      </section>
-
-      {/* Category Description */}
-      {selectedCategory && (
-        <div className="mb-8 p-4 bg-slate-800/50 border-l-4 border-orange-400">
-          <p className="text-slate-400 font-mono text-sm">
-            {resourcesData.categories.find((c) => c.id === selectedCategory)?.description}
-          </p>
-        </div>
-      )}
-
-      {/* Resources Grid */}
-      <section className="grid md:grid-cols-2 gap-6">
-        {filteredResources.map((resource) => {
-          const category = resourcesData.categories.find(
-            (c) => c.id === resource.category
-          );
-          const IconComponent = category ? iconMap[category.icon] || Sparkles : Sparkles;
-
-          return (
+          {featuredTools.map((tool) => (
             <div
-              key={resource.id}
-              className="group bg-slate-800/50 border border-slate-700 hover:border-orange-400 cut-corners overflow-hidden transition-all"
+              key={tool.id}
+              className="group relative bg-gradient-to-br from-slate-800 to-slate-800/50 border-2 border-orange-400/30 hover:border-orange-400 cut-corners overflow-hidden transition-all hover:shadow-lg hover:shadow-orange-400/10"
             >
               <div className="p-6">
-                <div className="flex items-start justify-between mb-3">
-                  <div className="flex items-center gap-3">
-                    <div className="p-2 bg-slate-700/50 group-hover:bg-orange-400/20 transition-colors">
-                      <IconComponent className="w-5 h-5 text-orange-400" />
-                    </div>
-                    <div>
-                      <h3 className="font-bold text-lg group-hover:text-orange-400 transition-colors">
-                        {resource.name}
-                      </h3>
-                      <span className="text-xs text-slate-500 font-mono">
-                        {category?.name}
-                      </span>
-                    </div>
-                  </div>
-                  {resource.featured && (
-                    <Star className="w-4 h-4 text-orange-400 fill-orange-400" />
-                  )}
+                <div className="absolute top-3 right-3">
+                  <Star className="w-4 h-4 text-orange-400 fill-orange-400" />
                 </div>
-
-                <p className="text-sm text-slate-400 mb-4">{resource.description}</p>
-
+                <h3 className="text-lg font-bold mb-2 group-hover:text-orange-400 transition-colors">
+                  {tool.name}
+                </h3>
+                <p className="text-sm text-slate-400 mb-4 line-clamp-2">
+                  {tool.description}
+                </p>
                 <div className="flex flex-wrap gap-2 mb-4">
-                  {resource.tags.map((tag) => (
+                  {tool.tags.map((tag) => (
                     <span
                       key={tag}
                       className="px-2 py-0.5 text-xs font-mono bg-slate-700/50 text-slate-300"
@@ -206,21 +155,18 @@ export default function VibePage() {
                 </div>
 
                 {/* Install Command */}
-                {"installCommand" in resource && resource.installCommand && (
+                {tool.installCommand && (
                   <div className="flex items-center gap-2 p-3 bg-slate-900 border border-slate-700 mb-4">
-                    <Terminal className="w-4 h-4 text-slate-500" />
-                    <code className="flex-1 text-sm text-cyan-400 font-mono">
-                      {resource.installCommand}
+                    <Terminal className="w-4 h-4 text-slate-500 shrink-0" />
+                    <code className="flex-1 text-xs text-cyan-400 font-mono truncate">
+                      {tool.installCommand}
                     </code>
                     <button
-                      onClick={(e) => {
-                        e.preventDefault();
-                        handleCopy(resource.id, resource.installCommand!);
-                      }}
-                      className="p-1.5 hover:bg-slate-700 transition-colors cursor-pointer"
+                      onClick={() => handleCopy(tool.id, tool.installCommand!)}
+                      className="p-1.5 hover:bg-slate-700 transition-colors cursor-pointer shrink-0"
                       title="複製指令"
                     >
-                      {copiedId === resource.id ? (
+                      {copiedId === tool.id ? (
                         <Check className="w-4 h-4 text-green-400" />
                       ) : (
                         <Copy className="w-4 h-4 text-slate-400" />
@@ -231,7 +177,7 @@ export default function VibePage() {
 
                 {/* Action Button */}
                 <a
-                  href={resource.url}
+                  href={tool.url}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="flex items-center justify-center gap-2 w-full py-3 bg-slate-700 hover:bg-orange-400 hover:text-slate-900 font-mono text-sm uppercase tracking-wide transition-all cursor-pointer"
@@ -241,15 +187,56 @@ export default function VibePage() {
                 </a>
               </div>
             </div>
-          );
-        })}
+          ))}
+        </div>
       </section>
 
-      {/* Empty State */}
-      {filteredResources.length === 0 && (
-        <div className="text-center py-20">
-          <p className="text-slate-500 font-mono">// 此分類暫無資源</p>
-        </div>
+      {/* Other Tools */}
+      {otherTools.length > 0 && (
+        <section>
+          <div className="flex items-center gap-3 mb-8">
+            <Sparkles className="w-5 h-5 text-cyan-400" />
+            <h2 className="text-2xl font-bold uppercase tracking-wider">
+              More Tools <span className="text-orange-400">//</span> 更多工具
+            </h2>
+          </div>
+          <div className="grid md:grid-cols-2 gap-6">
+            {otherTools.map((tool) => (
+              <div
+                key={tool.id}
+                className="group bg-slate-800/50 border border-slate-700 hover:border-orange-400 cut-corners overflow-hidden transition-all"
+              >
+                <div className="p-6">
+                  <div className="flex items-start justify-between mb-3">
+                    <h3 className="font-bold text-lg group-hover:text-orange-400 transition-colors">
+                      {tool.name}
+                    </h3>
+                  </div>
+                  <p className="text-sm text-slate-400 mb-4">{tool.description}</p>
+                  <div className="flex flex-wrap gap-2 mb-4">
+                    {tool.tags.map((tag) => (
+                      <span
+                        key={tag}
+                        className="px-2 py-0.5 text-xs font-mono bg-slate-700/50 text-slate-300"
+                      >
+                        {tag}
+                      </span>
+                    ))}
+                  </div>
+                  <a
+                    href={tool.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center justify-center gap-2 w-full py-3 bg-slate-700 hover:bg-orange-400 hover:text-slate-900 font-mono text-sm uppercase tracking-wide transition-all cursor-pointer"
+                  >
+                    <ExternalLink className="w-4 h-4" />
+                    前往網站
+                  </a>
+                </div>
+              </div>
+            ))}
+          </div>
+        </section>
       )}
     </div>
   );
