@@ -83,7 +83,7 @@ export default function PackagesPage() {
       </div>
 
       {/* Package Grid */}
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 stagger-children">
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 items-start stagger-children">
         {filteredPackages.map((pkg) => (
           <div
             key={pkg.id}

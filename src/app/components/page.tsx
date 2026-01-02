@@ -79,7 +79,7 @@ export default function ComponentsPage() {
       </div>
 
       {/* Components Grid */}
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 stagger-children">
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 items-start stagger-children">
         {filteredComponents.map((component) => (
           <div
             key={component.id}
