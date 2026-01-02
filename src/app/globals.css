@@ -387,3 +387,188 @@ code {
 .animate-spin-reverse {
   animation: spin-reverse 15s linear infinite;
 }
+
+/* ========================================
+   Light Mode Comprehensive Overrides
+   ======================================== */
+
+/* Card & Surface Backgrounds */
+.light .bg-slate-800,
+.light .bg-slate-800\/50 {
+  background-color: #FFFFFF !important;
+  border-color: #E2E8F0;
+}
+
+.light .bg-slate-900,
+.light .bg-slate-900\/80,
+.light .bg-slate-900\/95 {
+  background-color: #F8FAFC !important;
+}
+
+.light .bg-slate-950 {
+  background-color: #F1F5F9 !important;
+}
+
+.light .bg-slate-700 {
+  background-color: #E2E8F0 !important;
+}
+
+/* Text Colors - Ensure Readability */
+.light .text-slate-100,
+.light .text-slate-200,
+.light .text-slate-300 {
+  color: #1E293B !important;
+}
+
+.light .text-slate-400 {
+  color: #475569 !important;
+}
+
+.light .text-slate-500 {
+  color: #64748B !important;
+}
+
+.light .text-white {
+  color: #0F172A !important;
+}
+
+/* Keep accent colors visible */
+.light .text-orange-400 {
+  color: #EA580C !important;
+}
+
+.light .text-cyan-400 {
+  color: #0891B2 !important;
+}
+
+/* Border Colors */
+.light .border-slate-700,
+.light .border-slate-800 {
+  border-color: #E2E8F0 !important;
+}
+
+.light .border-slate-600 {
+  border-color: #CBD5E1 !important;
+}
+
+/* Input & Form Elements */
+.light input,
+.light textarea {
+  background-color: #FFFFFF !important;
+  border-color: #E2E8F0 !important;
+  color: #0F172A !important;
+}
+
+.light input::placeholder,
+.light textarea::placeholder {
+  color: #94A3B8 !important;
+}
+
+.light input:focus,
+.light textarea:focus {
+  border-color: #EA580C !important;
+}
+
+/* Buttons */
+.light .bg-slate-800.border.border-slate-700 {
+  background-color: #FFFFFF !important;
+  border-color: #E2E8F0 !important;
+}
+
+.light .bg-slate-800.border.border-slate-700:hover {
+  border-color: #EA580C !important;
+}
+
+/* Tags & Badges */
+.light .bg-slate-700 {
+  background-color: #E2E8F0 !important;
+  color: #334155 !important;
+}
+
+.light .bg-slate-700\/50 {
+  background-color: #F1F5F9 !important;
+}
+
+/* Code Blocks - Keep Dark */
+.light pre[class*="language-"],
+.light .bg-slate-900.border.border-slate-700 code,
+.light code.text-cyan-400 {
+  background-color: #1E293B !important;
+  color: #22D3EE !important;
+}
+
+/* Navbar */
+.light header.bg-slate-900\/80 {
+  background-color: rgba(255, 255, 255, 0.9) !important;
+  border-color: #E2E8F0 !important;
+}
+
+/* Mobile Menu */
+.light .bg-slate-900\/95 {
+  background-color: rgba(255, 255, 255, 0.98) !important;
+}
+
+/* Cards with backdrop-blur */
+.light .backdrop-blur {
+  background-color: rgba(255, 255, 255, 0.8) !important;
+}
+
+/* Selection in light mode */
+.light ::selection {
+  background: #EA580C;
+  color: #FFFFFF;
+}
+
+/* Scrollbar for light mode */
+.light::-webkit-scrollbar-track {
+  background: #F8FAFC;
+}
+
+.light::-webkit-scrollbar-thumb {
+  background: #CBD5E1;
+  border-left: 2px solid #EA580C;
+}
+
+.light::-webkit-scrollbar-thumb:hover {
+  background: #94A3B8;
+}
+
+/* Toast notifications */
+.light .bg-green-500\/20 {
+  background-color: rgba(34, 197, 94, 0.15) !important;
+}
+
+.light .bg-red-500\/20 {
+  background-color: rgba(239, 68, 68, 0.15) !important;
+}
+
+.light .bg-cyan-500\/20 {
+  background-color: rgba(6, 182, 212, 0.15) !important;
+}
+
+/* Footer section */
+.light footer.bg-slate-950 {
+  background-color: #F1F5F9 !important;
+}
+
+.light footer .fill-slate-900 {
+  fill: #F8FAFC !important;
+}
+
+/* Keyboard shortcuts */
+.light kbd {
+  background-color: #E2E8F0 !important;
+  color: #334155 !important;
+}
+
+/* Cut corners cards hover state */
+.light .cut-corners:hover {
+  border-color: #EA580C !important;
+}
+
+/* Gradient text - ensure visibility */
+.light .text-transparent.bg-clip-text {
+  -webkit-text-fill-color: initial;
+  background: none;
+  color: #EA580C !important;
+}
