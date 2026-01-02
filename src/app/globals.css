@@ -323,3 +323,22 @@ code {
 .token-string { color: #06B6D4; }
 .token-comment { color: #64748B; font-style: italic; }
 .token-number { color: #FB923C; }
+
+/* Decorative Spin Animations */
+@keyframes spin-slow {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+@keyframes spin-reverse {
+  from { transform: rotate(360deg); }
+  to { transform: rotate(0deg); }
+}
+
+.animate-spin-slow {
+  animation: spin-slow 20s linear infinite;
+}
+
+.animate-spin-reverse {
+  animation: spin-reverse 15s linear infinite;
+}
