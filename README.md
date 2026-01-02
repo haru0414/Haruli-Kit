@@ -1,36 +1,149 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Haruli Kit
 
-## Getting Started
+個人開發工具庫 - 收集常用的套件、程式碼片段和 UI 元件，讓新專案的建置更加快速高效。
 
-First, run the development server:
+## 功能特色
+
+| 功能 | 說明 |
+|------|------|
+| **套件庫** | 常用 npm 套件集合，支援搜尋/分類篩選，一鍵複製安裝指令 |
+| **程式碼片段** | 實用的 Custom Hooks、工具函式，附帶語法高亮 |
+| **元件展示** | 可複用的 UI 元件，含即時預覽與完整程式碼 |
+| **文件筆記** | 開發筆記與最佳實踐記錄 (持續擴充中) |
+
+## 技術棧
+
+- **框架**: Next.js 16 (App Router)
+- **樣式**: Tailwind CSS
+- **語言**: TypeScript
+- **程式碼高亮**: Prism React Renderer
+- **圖標**: Lucide React
+- **設計系統**: 基於 [UI/UX Pro Max](https://github.com/anthropics/claude-code-uipro) Bento Grid 風格
+
+## 快速開始
+
+### 安裝依賴
+
+```bash
+npm install
+```
+
+### 啟動開發伺服器
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+開啟 [http://localhost:3000](http://localhost:3000) 預覽網站。
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### 建置專案
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```bash
+npm run build
+```
 
-## Learn More
+## 專案結構
 
-To learn more about Next.js, take a look at the following resources:
+```
+haruli-kit/
+├── src/
+│   ├── app/                  # 頁面路由
+│   │   ├── page.tsx          # 首頁
+│   │   ├── packages/         # 套件庫
+│   │   ├── snippets/         # 程式碼片段
+│   │   ├── components/       # 元件展示
+│   │   └── docs/             # 文件筆記
+│   ├── components/           # 共用元件
+│   │   ├── layout/           # 版面元件
+│   │   └── ui/               # UI 元件
+│   ├── data/                 # JSON 資料
+│   │   ├── packages.json     # 套件資料
+│   │   ├── snippets.json     # 程式碼片段
+│   │   └── components.json   # 元件資料
+│   ├── lib/                  # 工具函式
+│   └── types/                # TypeScript 型別
+└── content/                  # MDX 文件 (預留)
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## 新增內容
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+### 新增套件
 
-## Deploy on Vercel
+編輯 `src/data/packages.json`：
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+```json
+{
+  "id": "package-id",
+  "name": "Package Name",
+  "description": "套件描述",
+  "installCommand": "npm install package-name",
+  "category": "ui",
+  "tags": ["tag1", "tag2"],
+  "documentation": "https://docs.example.com",
+  "npm": "https://www.npmjs.com/package/package-name",
+  "github": "https://github.com/user/repo"
+}
+```
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+### 新增程式碼片段
+
+編輯 `src/data/snippets.json`：
+
+```json
+{
+  "id": "snippet-id",
+  "title": "Snippet Title",
+  "description": "片段描述",
+  "language": "typescript",
+  "category": "hooks",
+  "tags": ["tag1", "tag2"],
+  "code": "// 你的程式碼"
+}
+```
+
+### 新增 UI 元件
+
+編輯 `src/data/components.json`：
+
+```json
+{
+  "id": "component-id",
+  "name": "Component Name",
+  "description": "元件描述",
+  "category": "button",
+  "tags": ["tag1", "tag2"],
+  "preview": true,
+  "code": "// 元件程式碼"
+}
+```
+
+## 設計系統
+
+### 色彩
+
+| 用途 | Light Mode | Dark Mode |
+|------|------------|-----------|
+| Primary | `#3B82F6` | `#3B82F6` |
+| Background | `#F8FAFC` | `#0F172A` |
+| Card | `#FFFFFF` | `#1E293B` |
+| Text | `#1E293B` | `#F1F5F9` |
+| Border | `#E2E8F0` | `#334155` |
+
+### 字體
+
+- **內文**: Inter
+- **程式碼**: JetBrains Mono
+
+## 部署
+
+推薦使用 [Vercel](https://vercel.com) 部署：
+
+```bash
+npm run build
+```
+
+或直接連結 GitHub 倉庫進行自動部署。
+
+## License
+
+MIT

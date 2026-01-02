@@ -1,0 +1,56 @@
+{
+  "categories": [
+    { "id": "react", "name": "React", "icon": "⚛️" },
+    { "id": "typescript", "name": "TypeScript", "icon": "📘" },
+    { "id": "css", "name": "CSS/Tailwind", "icon": "🎨" },
+    { "id": "hooks", "name": "Custom Hooks", "icon": "🪝" },
+    { "id": "utils", "name": "工具函式", "icon": "🔧" }
+  ],
+  "snippets": [
+    {
+      "id": "use-local-storage",
+      "title": "useLocalStorage Hook",
+      "description": "同步 state 與 localStorage 的自定義 Hook",
+      "language": "typescript",
+      "category": "hooks",
+      "tags": ["hook", "storage", "react"],
+      "code": "import { useState, useEffect } from 'react';\n\nexport function useLocalStorage<T>(key: string, initialValue: T) {\n  const [storedValue, setStoredValue] = useState<T>(() => {\n    if (typeof window === 'undefined') return initialValue;\n    try {\n      const item = window.localStorage.getItem(key);\n      return item ? JSON.parse(item) : initialValue;\n    } catch (error) {\n      console.error(error);\n      return initialValue;\n    }\n  });\n\n  const setValue = (value: T | ((val: T) => T)) => {\n    try {\n      const valueToStore = value instanceof Function ? value(storedValue) : value;\n      setStoredValue(valueToStore);\n      if (typeof window !== 'undefined') {\n        window.localStorage.setItem(key, JSON.stringify(valueToStore));\n      }\n    } catch (error) {\n      console.error(error);\n    }\n  };\n\n  return [storedValue, setValue] as const;\n}"
+    },
+    {
+      "id": "use-debounce",
+      "title": "useDebounce Hook",
+      "description": "防抖動 Hook，適合搜尋輸入",
+      "language": "typescript",
+      "category": "hooks",
+      "tags": ["hook", "debounce", "performance"],
+      "code": "import { useState, useEffect } from 'react';\n\nexport function useDebounce<T>(value: T, delay: number): T {\n  const [debouncedValue, setDebouncedValue] = useState<T>(value);\n\n  useEffect(() => {\n    const handler = setTimeout(() => {\n      setDebouncedValue(value);\n    }, delay);\n\n    return () => {\n      clearTimeout(handler);\n    };\n  }, [value, delay]);\n\n  return debouncedValue;\n}"
+    },
+    {
+      "id": "cn-utility",
+      "title": "cn() 工具函式",
+      "description": "合併 Tailwind CSS class 的工具函式",
+      "language": "typescript",
+      "category": "utils",
+      "tags": ["tailwind", "classname", "utility"],
+      "code": "import { clsx, type ClassValue } from 'clsx';\nimport { twMerge } from 'tailwind-merge';\n\nexport function cn(...inputs: ClassValue[]) {\n  return twMerge(clsx(inputs));\n}"
+    },
+    {
+      "id": "fetch-wrapper",
+      "title": "Fetch API 封裝",
+      "description": "帶有錯誤處理的 fetch 封裝",
+      "language": "typescript",
+      "category": "utils",
+      "tags": ["fetch", "api", "async"],
+      "code": "interface FetchOptions extends RequestInit {\n  timeout?: number;\n}\n\nexport async function fetchWithTimeout<T>(\n  url: string,\n  options: FetchOptions = {}\n): Promise<T> {\n  const { timeout = 8000, ...fetchOptions } = options;\n\n  const controller = new AbortController();\n  const id = setTimeout(() => controller.abort(), timeout);\n\n  try {\n    const response = await fetch(url, {\n      ...fetchOptions,\n      signal: controller.signal,\n    });\n\n    if (!response.ok) {\n      throw new Error(`HTTP error! status: ${response.status}`);\n    }\n\n    return await response.json();\n  } finally {\n    clearTimeout(id);\n  }\n}"
+    },
+    {
+      "id": "button-variants",
+      "title": "Button 樣式變體",
+      "description": "Tailwind CSS 按鈕樣式變體",
+      "language": "css",
+      "category": "css",
+      "tags": ["button", "tailwind", "component"],
+      "code": "/* Primary Button */\n.btn-primary {\n  @apply px-4 py-2 bg-blue-600 text-white rounded-lg\n         hover:bg-blue-700 active:bg-blue-800\n         transition-colors duration-200\n         focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2;\n}\n\n/* Secondary Button */\n.btn-secondary {\n  @apply px-4 py-2 bg-gray-200 text-gray-800 rounded-lg\n         hover:bg-gray-300 active:bg-gray-400\n         transition-colors duration-200\n         dark:bg-gray-700 dark:text-gray-200\n         dark:hover:bg-gray-600;\n}\n\n/* Ghost Button */\n.btn-ghost {\n  @apply px-4 py-2 text-gray-600 rounded-lg\n         hover:bg-gray-100 active:bg-gray-200\n         transition-colors duration-200\n         dark:text-gray-300 dark:hover:bg-gray-800;\n}"
+    }
+  ]
+}

@@ -1,0 +1,113 @@
+{
+  "categories": [
+    { "id": "ui", "name": "UI 框架", "icon": "🎨" },
+    { "id": "state", "name": "狀態管理", "icon": "📦" },
+    { "id": "form", "name": "表單處理", "icon": "📝" },
+    { "id": "animation", "name": "動畫效果", "icon": "✨" },
+    { "id": "utility", "name": "工具函式", "icon": "🔧" },
+    { "id": "fetch", "name": "資料請求", "icon": "🌐" },
+    { "id": "testing", "name": "測試工具", "icon": "🧪" }
+  ],
+  "packages": [
+    {
+      "id": "tailwindcss",
+      "name": "Tailwind CSS",
+      "description": "實用優先的 CSS 框架",
+      "installCommand": "npm install -D tailwindcss postcss autoprefixer",
+      "category": "ui",
+      "tags": ["css", "styling", "utility-first"],
+      "documentation": "https://tailwindcss.com/docs",
+      "npm": "https://www.npmjs.com/package/tailwindcss",
+      "github": "https://github.com/tailwindlabs/tailwindcss"
+    },
+    {
+      "id": "framer-motion",
+      "name": "Framer Motion",
+      "description": "React 動畫庫，簡單易用的 API",
+      "installCommand": "npm install framer-motion",
+      "category": "animation",
+      "tags": ["animation", "react", "motion"],
+      "documentation": "https://www.framer.com/motion/",
+      "npm": "https://www.npmjs.com/package/framer-motion"
+    },
+    {
+      "id": "zustand",
+      "name": "Zustand",
+      "description": "輕量級 React 狀態管理",
+      "installCommand": "npm install zustand",
+      "category": "state",
+      "tags": ["state", "react", "lightweight"],
+      "documentation": "https://docs.pmnd.rs/zustand",
+      "npm": "https://www.npmjs.com/package/zustand"
+    },
+    {
+      "id": "react-hook-form",
+      "name": "React Hook Form",
+      "description": "高效能表單驗證庫",
+      "installCommand": "npm install react-hook-form",
+      "category": "form",
+      "tags": ["form", "validation", "react"],
+      "documentation": "https://react-hook-form.com/",
+      "npm": "https://www.npmjs.com/package/react-hook-form"
+    },
+    {
+      "id": "zod",
+      "name": "Zod",
+      "description": "TypeScript-first schema 驗證",
+      "installCommand": "npm install zod",
+      "category": "form",
+      "tags": ["validation", "typescript", "schema"],
+      "documentation": "https://zod.dev/",
+      "npm": "https://www.npmjs.com/package/zod"
+    },
+    {
+      "id": "axios",
+      "name": "Axios",
+      "description": "Promise-based HTTP 客戶端",
+      "installCommand": "npm install axios",
+      "category": "fetch",
+      "tags": ["http", "request", "promise"],
+      "documentation": "https://axios-http.com/",
+      "npm": "https://www.npmjs.com/package/axios"
+    },
+    {
+      "id": "tanstack-query",
+      "name": "TanStack Query",
+      "description": "強大的資料同步與快取",
+      "installCommand": "npm install @tanstack/react-query",
+      "category": "fetch",
+      "tags": ["data-fetching", "cache", "react"],
+      "documentation": "https://tanstack.com/query",
+      "npm": "https://www.npmjs.com/package/@tanstack/react-query"
+    },
+    {
+      "id": "clsx",
+      "name": "clsx",
+      "description": "條件式 className 工具",
+      "installCommand": "npm install clsx",
+      "category": "utility",
+      "tags": ["classname", "utility"],
+      "npm": "https://www.npmjs.com/package/clsx"
+    },
+    {
+      "id": "date-fns",
+      "name": "date-fns",
+      "description": "現代 JavaScript 日期工具庫",
+      "installCommand": "npm install date-fns",
+      "category": "utility",
+      "tags": ["date", "time", "utility"],
+      "documentation": "https://date-fns.org/",
+      "npm": "https://www.npmjs.com/package/date-fns"
+    },
+    {
+      "id": "lucide-react",
+      "name": "Lucide React",
+      "description": "精美的開源圖標庫",
+      "installCommand": "npm install lucide-react",
+      "category": "ui",
+      "tags": ["icons", "svg", "react"],
+      "documentation": "https://lucide.dev/",
+      "npm": "https://www.npmjs.com/package/lucide-react"
+    }
+  ]
+}
