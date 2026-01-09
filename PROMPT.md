@@ -1,3 +1,11 @@
+# Design Templates Collection
+
+這是一個設計模板集合，收錄了多種獨特的 UI 風格供專案參考使用。
+
+---
+
+## Template 1: Ronin Toolkit (武士)
+
 你是世界頂級的 UI/UX 設計師。請根據以下規格，為「個人開發工具庫（Personal Developer Toolkit）」網站設計一套極具風格的 UI 系統。目標是將參考圖中「現代武士與向量插畫」的氛圍轉化為一個精準、高效且視覺強烈的程式碼管理平台。
 
 **1. 整體氛圍 (The Vibe)**
@@ -43,569 +51,85 @@
   - **'Snippet Cards'**: 帶有「一鍵複製」功能的卡片，點擊複製時顯示「刀光閃過」的微動畫。
   - **'Dependency Graph'**: 互動式節點圖，顯示套件之間的依賴關係。
 
-<!DOCTYPE html>
-<html lang="zh-TW">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ronin Toolkit | 個人開發工具庫</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=JetBrains+Mono:wght@300;400;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: {
-                        slate: {
-                            900: '#0F172A',
-                            800: '#1E293B',
-                            700: '#334155',
-                            400: '#94A3B8',
-                            50: '#F8FAFC',
-                        },
-                        orange: {
-                            400: '#FB923C',
-                        },
-                        cyan: {
-                            500: '#06B6D4',
-                        }
-                    },
-                    fontFamily: {
-                        sans: ['Space Grotesk', 'sans-serif'],
-                        mono: ['JetBrains Mono', 'monospace'],
-                    },
-                    boxShadow: {
-                        'brutal': '4px 4px 0px #FB923C',
-                    },
-                    animation: {
-                        'marquee': 'marquee 25s linear infinite',
-                        'float': 'float 6s ease-in-out infinite',
-                        'slash': 'slash 0.2s cubic-bezier(0.1, 0.7, 1.0, 0.1) forwards',
-                    },
-                    keyframes: {
-                        marquee: {
-                            '0%': { transform: 'translateX(0%)' },
-                            '100%': { transform: 'translateX(-100%)' },
-                        },
-                        float: {
-                            '0%, 100%': { transform: 'translateY(0)' },
-                            '50%': { transform: 'translateY(-20px)' },
-                        },
-                        slash: {
-                            '0%': { clipPath: 'polygon(0 0, 0 0, 0 100%, 0 100%)' },
-                            '100%': { clipPath: 'polygon(0 0, 100% 0, 100% 100%, 0 100%)' }
-                        }
-                    }
-                }
-            }
-        }
-    </script>
+---
 
-    <style>
-        body {
-            background-color: #0F172A;
-            color: #F8FAFC;
-            overflow-x: hidden;
-        }
+## Template 2: Retro Manga Pop (日系復古配色)
 
-        /* Custom Scrollbar */
-        ::-webkit-scrollbar {
-            width: 8px;
-        }
-        ::-webkit-scrollbar-track {
-            background: #1E293B;
-        }
-        ::-webkit-scrollbar-thumb {
-            background: #334155;
-            border-radius: 4px;
-        }
-        ::-webkit-scrollbar-thumb:hover {
-            background: #FB923C;
-        }
+請扮演一位精通日系美學與敘事設計的資深前端架構師。請基於《排球少年》復古海報風格，為一位創意工作者打造一個具有強烈「敘事感（Storytelling）」的個人作品集網站。
 
-        /* Angled Corners Utility */
-        .cut-corners {
-            clip-path: polygon(
-                15px 0, 100% 0,
-                100% calc(100% - 15px),
-                calc(100% - 15px) 100%,
-                0 100%,
-                0 15px
-            );
-        }
+**1. 設計靈魂 (The Vibe)**
+「熱血復古漫畫風 (Retro-Manga Pop) 遇見 懷舊質感敘事 (Nostalgic Lo-fi Storytelling)」。網站應像是一本正在翻閱的動漫設定集，充滿紙張紋理、鮮明的青春色彩與動態的分鏡感。
 
-        .cut-corners-sm {
-            clip-path: polygon(
-                8px 0, 100% 0,
-                100% calc(100% - 8px),
-                calc(100% - 8px) 100%,
-                0 100%,
-                0 8px
-            );
-        }
+**2. 顏色調色板 (Tailwind Mapping)**
 
-        /* Background Sun */
-        .ronin-sun {
-            position: fixed;
-            top: 10%;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 80vh;
-            height: 80vh;
-            background: linear-gradient(180deg, #FB923C 0%, #F43F5E 100%);
-            border-radius: 50%;
-            z-index: -1;
-            opacity: 0.15;
-            filter: blur(60px);
-            pointer-events: none;
-        }
+- **背景 (Canvas):** 使用帶有暖色調的米黃色紙張質感 `bg-[#F2EAD3]` (Warm Paper) 或 `bg-stone-100`，並必須疊加一層 CSS Noise 噪點紋理。
+- **主要文字 (Ink):** 深墨藍色 `text-[#1A2332]` (Slate-900)，模仿漫畫墨水。
+- **強調色 (Accent A - Nekoma Red):** 復古朱紅色 `bg-[#C83E34]` (Red-700)，用於按鈕、標籤與強調重點。
+- **強調色 (Accent B - Title Yellow):** 活力黃色 `text-[#FFC845]` (Amber-400)，用於大標題或裝飾性圖形。
+- **輔助色 (Deep Teal):** 復古青綠 `bg-[#2F5C68]` (Cyan-900)，用於深色區塊或 Footer。
 
-        /* Syntax Highlighting Base */
-        .token-keyword { color: #F472B6; }
-        .token-function { color: #FB923C; }
-        .token-string { color: #06B6D4; }
-        .token-comment { color: #64748B; font-style: italic; }
+**3. 排版系統 (Typography)**
 
-        /* Grid Pattern Overlay */
-        .grid-bg {
-            background-image: linear-gradient(rgba(51, 65, 85, 0.1) 1px, transparent 1px),
-            linear-gradient(90deg, rgba(51, 65, 85, 0.1) 1px, transparent 1px);
-            background-size: 40px 40px;
-        }
-    </style>
+- **標題:** 使用厚重的無襯線字體 (如 `Oswald`, `Anton` 或 `Dela Gothic One`)，字距緊湊 (tracking-tight)，模擬海報上的粗體字。
+- **內文:** 易讀的日系黑體或襯線體 (如 `Noto Sans JP` 或 `Shippori Mincho`)，行高設定寬鬆 (`leading-loose`) 以增加呼吸感。
 
-</head>
-<body class="font-sans antialiased grid-bg selection:bg-orange-400 selection:text-slate-900">
+**4. UI 元素與原子設計**
 
-    <!-- The Sun Background -->
-    <div class="ronin-sun animate-pulse"></div>
+- **卡片 (Cards):** 採用「漫畫格 (Manga Panel)」設計。純色背景，2px-3px 的粗黑邊框 (`border-2 border-slate-900`)，並帶有堅硬的陰影 (`box-shadow: 6px 6px 0px #1A2332`)。Hover 時卡片輕微上浮，陰影變深。
+- **按鈕 (Buttons):** 藥丸形 (`rounded-full`) 或剛硬矩形，高對比色 (紅底白字)，點擊時有明顯的「下壓」微動畫 (`active:translate-y-1`)。
+- **裝飾:** 加入網點 (Halftone patterns)、對話框氣泡 (Speech bubbles) 作為 UI 提示。
 
-    <!-- Floating Command Palette Hint -->
-    <div class="fixed bottom-8 right-8 z-50 hidden md:block">
-        <button onclick="toggleCommandPalette()" class="bg-slate-800 border-2 border-slate-700 text-slate-400 px-4 py-2 font-mono text-xs rounded-full shadow-lg hover:border-orange-400 hover:text-orange-400 transition-colors">
-            Press <span class="text-white border border-slate-600 rounded px-1 mx-1">⌘</span> <span class="text-white border border-slate-600 rounded px-1">K</span> to Search
-        </button>
-    </div>
+**5. 佈局與架構 (Storytelling Layout)**
 
-    <!-- Command Palette Modal (Hidden by default) -->
-    <div id="command-palette" class="fixed inset-0 z-[100] bg-slate-900/80 backdrop-blur-sm hidden flex items-start justify-center pt-32 opacity-0 transition-opacity duration-200">
-        <div class="w-full max-w-2xl bg-slate-800 border-2 border-orange-400 shadow-[0_0_50px_rgba(251,146,60,0.2)] transform scale-95 transition-transform duration-200 cut-corners">
-            <div class="flex items-center px-4 border-b border-slate-700">
-                <i class="fas fa-search text-orange-400 mr-3"></i>
-                <input type="text" placeholder="搜尋元件、函式庫或snippet..." class="w-full bg-transparent py-4 text-white placeholder-slate-500 focus:outline-none font-mono text-lg">
-                <span class="text-xs text-slate-500 font-mono border border-slate-700 px-2 py-1 rounded">ESC</span>
-            </div>
-            <div class="p-2">
-                <div class="text-xs font-mono text-slate-500 px-2 py-2">QUICK LINKS</div>
-                <button class="w-full text-left px-4 py-3 text-slate-300 hover:bg-orange-400 hover:text-slate-900 transition-colors font-mono flex justify-between items-center group">
-                    <span>> Install UI Kit</span>
-                    <span class="text-slate-600 group-hover:text-slate-800 text-xs">CMD + I</span>
-                </button>
-                <button class="w-full text-left px-4 py-3 text-slate-300 hover:bg-orange-400 hover:text-slate-900 transition-colors font-mono flex justify-between items-center group">
-                    <span>> Browse Snippets</span>
-                    <span class="text-slate-600 group-hover:text-slate-800 text-xs">CMD + S</span>
-                </button>
-            </div>
-        </div>
-    </div>
+- **導航列 (Sticky Navbar):** 設計成類似「公車站牌」或「地鐵路線圖」的樣式，標示當前所在的「章節」。
+- **Hero Section:** 分割畫面 (Split-screen)。左側為巨大的動態標題 (類似海報頂部)，右側為個人形象插畫或 3D 角色展示，背景有緩慢移動的雲朵動畫。
+- **關於我 (About):** 「角色卡 (Character Sheet)」設計。包含雷達圖 (技能分析)、關鍵屬性 (Experience/Tools) 以及像漫畫介紹般的文字佈局。
+- **作品集 (Projects):** 「選集 (Episode List)」佈局。使用橫向捲動 (Horizontal Scroll) 或 Bento Grid，每個專案像是一本漫畫單行本封面。
+- **頁尾 (Footer):** 下集預告風格，包含大字體的「TO BE CONTINUED」與聯絡方式。
 
-    <!-- Navbar -->
-    <header class="fixed top-0 w-full z-40 bg-slate-900/80 backdrop-blur-md border-b border-slate-800">
-        <div class="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
-            <div class="flex items-center gap-2">
-                <div class="w-8 h-8 bg-orange-400 cut-corners-sm flex items-center justify-center">
-                    <i class="fas fa-code text-slate-900 text-sm"></i>
-                </div>
-                <span class="font-bold tracking-widest text-xl uppercase">Ronin<span class="text-orange-400">.dev</span></span>
-            </div>
+**6. 互動與動效 (Constraints)**
 
-            <nav class="hidden md:flex gap-8">
-                <a href="#features" class="font-mono text-sm text-slate-400 hover:text-orange-400 transition-colors">// ARSENAL</a>
-                <a href="#snippets" class="font-mono text-sm text-slate-400 hover:text-orange-400 transition-colors">// SCROLLS</a>
-                <a href="#playground" class="font-mono text-sm text-slate-400 hover:text-orange-400 transition-colors">// DOJO</a>
-            </nav>
+- **視差滾動 (Parallax):** 背景的網點、文字與前景元素必須有不同速度的滾動位移，營造 2.5D 的深度感。
+- **轉場:** 頁面切換使用「翻頁」或「墨水暈染」效果。
+- **敘事性:** 隨著使用者向下滾動，透過 ScrollTrigger 觸發元素依序滑入 (如漫畫分鏡一格格出現)，引導視線。
 
-            <a href="#" class="bg-slate-800 text-orange-400 border border-slate-700 px-6 py-2 font-mono text-sm hover:bg-orange-400 hover:text-slate-900 transition-all cut-corners-sm">
-                GitHub Repo
-            </a>
-        </div>
-    </header>
+---
 
-    <main class="pt-20">
-        <!-- Hero Section -->
-        <section class="relative max-w-7xl mx-auto px-6 pt-20 pb-32 grid md:grid-cols-2 gap-12 items-center min-h-[90vh]">
-            <!-- Left: Content -->
-            <div class="space-y-8 z-10">
-                <div class="inline-block px-3 py-1 border border-cyan-500/30 bg-cyan-500/10 text-cyan-400 text-xs font-mono tracking-widest uppercase mb-4">
-                    v2.0.4 Stable Release
-                </div>
-                <h1 class="text-5xl md:text-7xl font-bold leading-tight tracking-tight">
-                    斬斷重複工作，<br>
-                    <span class="text-transparent bg-clip-text bg-gradient-to-r from-orange-400 to-rose-500">專注創造價值</span>。
-                </h1>
-                <p class="text-slate-400 text-lg md:text-xl font-light max-w-lg leading-relaxed">
-                    專為現代開發者打造的個人軍火庫。收集最常用的套件、Hooks 與 UI 元件，讓每次新專案的建置如拔刀般快速精準。
-                </p>
-                <div class="flex flex-col sm:flex-row gap-4 pt-4">
-                    <button class="bg-orange-400 text-slate-900 px-8 py-4 font-bold uppercase tracking-wide shadow-brutal hover:translate-y-1 hover:shadow-none transition-all cut-corners">
-                        立即裝備 Toolkit
-                    </button>
-                    <button onclick="toggleCommandPalette()" class="bg-slate-800 text-slate-300 border-2 border-slate-700 px-8 py-4 font-bold uppercase tracking-wide hover:border-orange-400 hover:text-white transition-colors cut-corners">
-                        $ npm install
-                    </button>
-                </div>
-            </div>
+## Template 3: Neko Stencil Art (貓貓)
 
-            <!-- Right: Code Visual -->
-            <div class="relative z-10 animate-float hidden md:block">
-                <!-- Back card for depth -->
-                <div class="absolute -inset-4 bg-orange-400/20 cut-corners transform rotate-3"></div>
+設計風格：「日系粗獷主義 (Neo-Brutalism) 遇上復古昭和海報」。這是一個極具故事性的個人部落格，視覺上必須重現強烈的紅黑對比與「版畫/模板塗鴉 (Stencil Art)」的質感。
 
-                <!-- Code Window -->
-                <div class="bg-slate-900 border border-slate-700 cut-corners p-6 shadow-2xl relative">
-                    <div class="flex items-center gap-2 mb-4">
-                        <div class="w-3 h-3 rounded-full bg-red-500"></div>
-                        <div class="w-3 h-3 rounded-full bg-yellow-500"></div>
-                        <div class="w-3 h-3 rounded-full bg-green-500"></div>
-                        <span class="ml-4 font-mono text-xs text-slate-500">useKatana.ts</span>
-                    </div>
-                    <pre class="font-mono text-sm leading-6 overflow-x-auto">
+**1. 核心氛圍**
+一個充滿野性與敘事感的數位捲軸，結合了舊紙張的溫潤質感與高對比的視覺衝擊，彷彿在閱讀一本動態的日式漫畫或地下雜誌。
 
-<code><span class="token-keyword">import</span> { <span class="token-function">usePrecision</span> } <span class="token-keyword">from</span> <span class="token-string">'@ronin/hooks'</span>;
+**2. 色彩計畫**
 
-<span class="token-keyword">export const</span> <span class="token-function">ProjectInit</span> = () => {
-<span class="token-keyword">const</span> { speed, efficiency } = <span class="token-function">usePrecision</span>();
+- **背景色 (Background):** `#F2EFE9` (使用 Tailwind `bg-stone-100` 或自定義 `bg-[#F2EFE9]`)，模擬陳舊的宣紙或畫布質感。
+- **主視覺紅 (Primary Red):** `#D92525` (接近 `bg-red-600`)，用於強調色、按鈕背景與巨大標題，重現視覺衝擊。
+- **墨色黑 (Ink Black):** `#1A1A1A` (使用 `text-neutral-900`)，用於主要文字與粗框線，模擬版畫墨跡。
+- **質感紋理:** 必須在 CSS 中加入噪點 (Noise) 或紙張紋理 (Paper Grain) 覆蓋層 (overlay)，以還原斑駁感。
 
-<span class="token-comment">// Eliminate boilerplates instantly</span>
-<span class="token-keyword">if</span> (speed > <span class="text-orange-400">9000</span>) {
-<span class="token-keyword">return</span> <span class="token-string">"Build Successful"</span>;
-}
+**3. 字體排版**
 
-<span class="token-keyword">return</span> <span class="token-keyword">null</span>;
-};</code></pre>
-<!-- Copy Button Overlay -->
-<button class="absolute top-6 right-6 p-2 text-slate-500 hover:text-orange-400 transition-colors">
-<i class="far fa-copy"></i>
-</button>
-</div>
+- **標題:** 使用粗壯的日系無襯線體 (如 Noto Sans JP Black 或類似的 Poster Fonts)，字距緊湊，模擬海報排版。
+- **內文:** 使用高可讀性的襯線體 (Serif, 如 Noto Serif JP)，增加「說故事」的文學氣息。
+- **特色:** 支援直排文字 (writing-mode: vertical-rl) 用於裝飾性標題。
 
-                <!-- Floating Elements -->
-                <div class="absolute -bottom-10 -right-10 bg-slate-800 border border-slate-700 p-4 cut-corners-sm shadow-xl flex items-center gap-3">
-                    <div class="bg-green-500/20 text-green-400 p-2 rounded-sm">
-                        <i class="fas fa-check"></i>
-                    </div>
-                    <div>
-                        <div class="text-xs text-slate-400 uppercase font-bold">Build Time</div>
-                        <div class="text-xl font-mono font-bold">-45%</div>
-                    </div>
-                </div>
-            </div>
-        </section>
+**4. UI 組件設計 (原子設計)**
 
-        <!-- Tech Stack Marquee -->
-        <div class="bg-slate-900 border-y border-slate-800 overflow-hidden py-6">
-            <div class="relative flex overflow-x-hidden group">
-                <div class="py-2 animate-marquee whitespace-nowrap flex gap-16 items-center opacity-50 grayscale hover:grayscale-0 transition-all duration-500">
-                    <span class="text-2xl font-bold flex items-center gap-2"><i class="fab fa-react"></i> React</span>
-                    <span class="text-2xl font-bold flex items-center gap-2"><i class="fab fa-vuejs"></i> Vue</span>
-                    <span class="text-2xl font-bold flex items-center gap-2"><i class="fab fa-js"></i> TypeScript</span>
-                    <span class="text-2xl font-bold flex items-center gap-2"><i class="fab fa-css3-alt"></i> Tailwind</span>
-                    <span class="text-2xl font-bold flex items-center gap-2"><i class="fab fa-node"></i> Node.js</span>
-                    <span class="text-2xl font-bold flex items-center gap-2"><i class="fab fa-docker"></i> Docker</span>
-                    <span class="text-2xl font-bold flex items-center gap-2"><i class="fab fa-git-alt"></i> Git</span>
-                    <!-- Repeat -->
-                    <span class="text-2xl font-bold flex items-center gap-2"><i class="fab fa-react"></i> React</span>
-                    <span class="text-2xl font-bold flex items-center gap-2"><i class="fab fa-vuejs"></i> Vue</span>
-                    <span class="text-2xl font-bold flex items-center gap-2"><i class="fab fa-js"></i> TypeScript</span>
-                    <span class="text-2xl font-bold flex items-center gap-2"><i class="fab fa-css3-alt"></i> Tailwind</span>
-                </div>
-            </div>
-        </div>
+- **按鈕:** 不使用圓角 (rounded-none) 或微圓角，帶有「硬陰影 (Hard Shadow)」效果 (e.g., `shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]`)，Hover 時按鈕位移填滿陰影，創造按壓實體感。
+- **卡片 (文章預覽):** 粗黑邊框 (`border-2 border-neutral-900`)，背景使用紙張色，Hover 時整體輕微旋轉或放大，並帶有素描線條的裝飾動畫。
+- **圖片處理:** 所有圖片需經過 CSS 濾鏡處理 (High Contrast, Grayscale + Red Tint)，使其融入整體版畫風格。
 
-        <!-- The Arsenal (Features Grid) -->
-        <section id="features" class="max-w-7xl mx-auto px-6 py-32">
-            <div class="flex flex-col md:flex-row justify-between items-end mb-16 border-b border-slate-800 pb-8">
-                <div>
-                    <h2 class="text-4xl font-bold uppercase tracking-wider mb-2">The Arsenal <span class="text-orange-400">//</span> 武器庫</h2>
-                    <p class="text-slate-400 font-mono">Select your weapon. Deploy instantly.</p>
-                </div>
-                <div class="hidden md:block">
-                    <div class="flex gap-2">
-                        <div class="w-3 h-3 bg-slate-700"></div>
-                        <div class="w-3 h-3 bg-slate-700"></div>
-                        <div class="w-3 h-3 bg-orange-400"></div>
-                    </div>
-                </div>
-            </div>
+**5. 連貫動畫與敘事性 (關鍵)**
 
-            <!-- Bento Grid -->
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+- **捲軸敘事 (Scrollytelling):** 頁面必須有一條「視覺引導線」(例如一條紅色的線或墨跡)，隨著使用者滾動從頂部延伸到底部，串聯起 Hero Section、文章列表與頁尾，象徵「故事線」。
+- **進場動畫:** 元素不應只是淡入，而應該像「蓋章」一樣重擊出現，或是像水墨暈染般展開。
 
-                <!-- Feature 1: Hooks Library -->
-                <div class="md:col-span-2 bg-slate-800/50 backdrop-blur border border-slate-700 p-8 cut-corners group hover:border-orange-400 transition-colors relative overflow-hidden">
-                    <div class="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-20 transition-opacity">
-                        <i class="fas fa-anchor text-9xl"></i>
-                    </div>
-                    <div class="relative z-10">
-                        <h3 class="text-2xl font-bold mb-4 flex items-center gap-3">
-                            <i class="fas fa-link text-cyan-500"></i> Custom Hooks
-                        </h3>
-                        <p class="text-slate-400 mb-6 max-w-md">超過 50 個經過實戰驗證的 React/Vue Hooks。處理 API 請求、狀態管理、裝置感測，一行程式碼搞定。</p>
-                        <div class="bg-slate-900 p-4 border border-slate-700 font-mono text-sm text-slate-300">
-                            <span class="text-purple-400">const</span> { data, loading } = <span class="text-yellow-400">useFetch</span>(<span class="text-green-400">'/api/ronin'</span>);
-                        </div>
-                    </div>
-                </div>
+**6. 佈局架構**
 
-                <!-- Feature 2: UI Components -->
-                <div class="bg-slate-800/50 backdrop-blur border border-slate-700 p-8 cut-corners group hover:border-orange-400 transition-colors flex flex-col justify-between">
-                    <div>
-                        <h3 class="text-2xl font-bold mb-4 flex items-center gap-3">
-                            <i class="fas fa-layer-group text-orange-400"></i> UI Kits
-                        </h3>
-                        <p class="text-slate-400 mb-4">基於 Tailwind 的 headless 元件。無樣式約束，完全可客製化。</p>
-                    </div>
-                    <div class="grid grid-cols-2 gap-2 mt-4">
-                        <div class="h-8 bg-slate-700 rounded-sm animate-pulse"></div>
-                        <div class="h-8 bg-slate-600 rounded-sm"></div>
-                        <div class="col-span-2 h-20 bg-slate-700/50 rounded-sm"></div>
-                    </div>
-                </div>
-
-                <!-- Feature 3: Snippets Manager -->
-                <div class="bg-slate-800/50 backdrop-blur border border-slate-700 p-8 cut-corners group hover:border-orange-400 transition-colors">
-                    <h3 class="text-2xl font-bold mb-4 flex items-center gap-3">
-                        <i class="fas fa-scroll text-pink-500"></i> Smart Snippets
-                    </h3>
-                    <p class="text-slate-400 mb-6">VS Code 擴充套件整合。輸入 `rn-` 即可展開常用的 Config 設定檔。</p>
-                    <ul class="space-y-2 font-mono text-sm">
-                        <li class="flex justify-between border-b border-slate-700 pb-1">
-                            <span>rn-tailwind</span>
-                            <span class="text-slate-500">Config Init</span>
-                        </li>
-                        <li class="flex justify-between border-b border-slate-700 pb-1">
-                            <span>rn-docker</span>
-                            <span class="text-slate-500">Dockerfile</span>
-                        </li>
-                        <li class="flex justify-between">
-                            <span>rn-ci</span>
-                            <span class="text-slate-500">GitHub Action</span>
-                        </li>
-                    </ul>
-                </div>
-
-                <!-- Feature 4: CLI Tool -->
-                <div class="md:col-span-2 bg-slate-800/50 backdrop-blur border border-slate-700 p-8 cut-corners group hover:border-orange-400 transition-colors">
-                    <div class="flex flex-col md:flex-row gap-8 items-center">
-                        <div class="flex-1">
-                            <h3 class="text-2xl font-bold mb-4 flex items-center gap-3">
-                                <i class="fas fa-terminal text-green-500"></i> Ronin CLI
-                            </h3>
-                            <p class="text-slate-400 mb-6">最強大的終端機助手。自動偵測專案類型，推薦適合的工具包。</p>
-                            <a href="#" class="inline-flex items-center text-orange-400 font-bold hover:text-white transition-colors">
-                                查看 CLI 文件 <i class="fas fa-arrow-right ml-2"></i>
-                            </a>
-                        </div>
-                        <div class="w-full md:w-1/2">
-                            <div class="bg-slate-950 rounded-lg p-4 font-mono text-xs border border-slate-800 shadow-inner">
-                                <div class="flex gap-1.5 mb-3">
-                                    <div class="w-2.5 h-2.5 rounded-full bg-slate-700"></div>
-                                    <div class="w-2.5 h-2.5 rounded-full bg-slate-700"></div>
-                                    <div class="w-2.5 h-2.5 rounded-full bg-slate-700"></div>
-                                </div>
-                                <div class="text-green-400">$ ronin init my-app</div>
-                                <div class="text-slate-400 mt-1">> Detecting framework... Next.js 14</div>
-                                <div class="text-slate-400">> Installing dependencies...</div>
-                                <div class="text-cyan-400 mt-1 typing-cursor">[====================] 100%</div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Interactive Component Playground (Dojo) -->
-        <section id="playground" class="bg-slate-900 border-y border-slate-800 py-32 relative overflow-hidden">
-            <!-- Background Pattern -->
-            <div class="absolute inset-0 grid-bg opacity-30"></div>
-
-            <div class="max-w-5xl mx-auto px-6 relative z-10">
-                <div class="text-center mb-16">
-                    <h2 class="text-4xl font-bold uppercase tracking-wider mb-4">The Dojo <span class="text-orange-400">//</span> 試煉場</h2>
-                    <p class="text-slate-400">即時調整參數，預覽元件效果。</p>
-                </div>
-
-                <div class="grid md:grid-cols-3 gap-0 border border-slate-700 bg-slate-800 shadow-2xl">
-                    <!-- Controls -->
-                    <div class="p-8 border-b md:border-b-0 md:border-r border-slate-700 space-y-8">
-                        <div>
-                            <label class="text-xs font-mono uppercase text-slate-500 block mb-3">Variant</label>
-                            <div class="flex gap-2">
-                                <button onclick="setVariant('solid')" class="flex-1 bg-slate-700 text-xs py-2 hover:bg-orange-400 hover:text-slate-900 transition-colors active-variant">Solid</button>
-                                <button onclick="setVariant('outline')" class="flex-1 bg-slate-900 border border-slate-700 text-xs py-2 hover:border-orange-400 transition-colors">Outline</button>
-                            </div>
-                        </div>
-                        <div>
-                            <label class="text-xs font-mono uppercase text-slate-500 block mb-3">State</label>
-                            <div class="flex items-center justify-between text-sm text-slate-300">
-                                <span>Loading</span>
-                                <div onclick="toggleLoading()" class="w-10 h-5 bg-slate-900 rounded-full relative cursor-pointer border border-slate-600 toggle-switch">
-                                    <div class="w-3 h-3 bg-slate-400 rounded-full absolute top-1 left-1 transition-all toggle-dot"></div>
-                                </div>
-                            </div>
-                        </div>
-                        <div>
-                            <label class="text-xs font-mono uppercase text-slate-500 block mb-3">Shadow</label>
-                            <input type="range" min="0" max="10" value="4" class="w-full h-1 bg-slate-600 appearance-none rounded-lg cursor-pointer accent-orange-400" oninput="updateShadow(this.value)">
-                        </div>
-                    </div>
-
-                    <!-- Preview -->
-                    <div class="md:col-span-2 p-12 flex items-center justify-center bg-slate-900/50 relative overflow-hidden">
-                        <div class="absolute inset-0 flex items-center justify-center opacity-5 pointer-events-none">
-                             <i class="fas fa-dragon text-[200px]"></i>
-                        </div>
-
-                        <!-- The Component Being Tested -->
-                        <button id="demo-btn" class="bg-orange-400 text-slate-900 px-8 py-3 font-bold uppercase tracking-wide shadow-[4px_4px_0px_#FFF] transition-all transform active:translate-y-1 active:shadow-none flex items-center gap-2">
-                            <span id="btn-text">Confirm Action</span>
-                            <i id="btn-icon" class="fas fa-arrow-right"></i>
-                            <i id="loading-icon" class="fas fa-circle-notch fa-spin hidden"></i>
-                        </button>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- CTA / Footer -->
-        <footer class="relative pt-32 pb-12 bg-slate-950 overflow-hidden">
-            <!-- Jagged Top Border SVG -->
-            <div class="absolute top-0 left-0 w-full overflow-hidden leading-none">
-                <svg class="relative block w-[calc(100%+1.3px)] h-[50px]" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none">
-                    <path d="M1200 120L0 16.48 0 0 1200 0 1200 120z" class="fill-slate-900"></path>
-                </svg>
-            </div>
-
-            <div class="max-w-4xl mx-auto px-6 text-center relative z-10">
-                <h2 class="text-3xl md:text-5xl font-bold mb-8">準備好拔刀了嗎？</h2>
-                <p class="text-slate-400 mb-12 max-w-xl mx-auto">加入超過 5,000 名開發者的行列，使用 Ronin Toolkit 加速你的開發流程。</p>
-
-                <div class="flex flex-col sm:flex-row justify-center gap-6 mb-20">
-                    <input type="email" placeholder="輸入您的 Email" class="bg-slate-900 border-b-2 border-slate-700 px-4 py-3 w-full sm:w-80 focus:outline-none focus:border-orange-400 transition-colors text-white placeholder-slate-600">
-                    <button class="bg-orange-400 text-slate-900 px-8 py-3 font-bold uppercase hover:bg-white transition-colors">
-                        訂閱電子報
-                    </button>
-                </div>
-
-                <div class="border-t border-slate-800 pt-12 flex flex-col md:flex-row justify-between items-center">
-                    <div class="flex items-center gap-2 mb-4 md:mb-0">
-                        <div class="w-6 h-6 bg-slate-800 flex items-center justify-center border border-slate-700">
-                             <span class="text-orange-400 font-bold text-xs">R</span>
-                        </div>
-                        <span class="font-mono text-sm text-slate-500">© 2023 Ronin Toolkit. MIT License.</span>
-                    </div>
-                    <div class="flex gap-6">
-                        <a href="#" class="text-slate-500 hover:text-orange-400 transition-colors"><i class="fab fa-github text-xl"></i></a>
-                        <a href="#" class="text-slate-500 hover:text-orange-400 transition-colors"><i class="fab fa-twitter text-xl"></i></a>
-                        <a href="#" class="text-slate-500 hover:text-orange-400 transition-colors"><i class="fab fa-discord text-xl"></i></a>
-                    </div>
-                </div>
-            </div>
-        </footer>
-    </main>
-
-    <script>
-        // Command Palette Logic
-        const palette = document.getElementById('command-palette');
-        const paletteInner = palette.querySelector('div');
-
-        function toggleCommandPalette() {
-            if (palette.classList.contains('hidden')) {
-                palette.classList.remove('hidden');
-                // Small delay to allow display:block to apply before opacity transition
-                setTimeout(() => {
-                    palette.classList.remove('opacity-0');
-                    paletteInner.classList.remove('scale-95');
-                    paletteInner.classList.add('scale-100');
-                    palette.querySelector('input').focus();
-                }, 10);
-            } else {
-                palette.classList.add('opacity-0');
-                paletteInner.classList.remove('scale-100');
-                paletteInner.classList.add('scale-95');
-                setTimeout(() => {
-                    palette.classList.add('hidden');
-                }, 200);
-            }
-        }
-
-        // Keyboard Shortcuts
-        document.addEventListener('keydown', (e) => {
-            if ((e.metaKey || e.ctrlKey) && e.key === 'k') {
-                e.preventDefault();
-                toggleCommandPalette();
-            }
-            if (e.key === 'Escape' && !palette.classList.contains('hidden')) {
-                toggleCommandPalette();
-            }
-        });
-
-        // Close on click outside
-        palette.addEventListener('click', (e) => {
-            if (e.target === palette) toggleCommandPalette();
-        });
-
-        // Playground Logic
-        const demoBtn = document.getElementById('demo-btn');
-        const btnText = document.getElementById('btn-text');
-        const btnIcon = document.getElementById('btn-icon');
-        const loadingIcon = document.getElementById('loading-icon');
-        let isLoading = false;
-
-        function setVariant(type) {
-            // Reset classes
-            demoBtn.className = "px-8 py-3 font-bold uppercase tracking-wide transition-all transform active:translate-y-1 flex items-center gap-2";
-
-            if (type === 'solid') {
-                demoBtn.classList.add('bg-orange-400', 'text-slate-900', 'shadow-[4px_4px_0px_#FFF]', 'active:shadow-none');
-            } else {
-                demoBtn.classList.add('bg-transparent', 'text-orange-400', 'border-2', 'border-orange-400', 'shadow-[4px_4px_0px_#FB923C]', 'hover:bg-orange-400/10', 'active:shadow-none');
-            }
-            updateShadow(document.querySelector('input[type=range]').value);
-        }
-
-        function toggleLoading() {
-            isLoading = !isLoading;
-            const toggleDot = document.querySelector('.toggle-dot');
-
-            if (isLoading) {
-                toggleDot.style.transform = 'translateX(20px)';
-                toggleDot.classList.replace('bg-slate-400', 'bg-orange-400');
-                btnText.innerText = "Processing...";
-                btnIcon.classList.add('hidden');
-                loadingIcon.classList.remove('hidden');
-                demoBtn.classList.add('cursor-wait', 'opacity-80');
-            } else {
-                toggleDot.style.transform = 'translateX(0)';
-                toggleDot.classList.replace('bg-orange-400', 'bg-slate-400');
-                btnText.innerText = "Confirm Action";
-                btnIcon.classList.remove('hidden');
-                loadingIcon.classList.add('hidden');
-                demoBtn.classList.remove('cursor-wait', 'opacity-80');
-            }
-        }
-
-        function updateShadow(val) {
-            // Only update shadow size if not active (simple logic for demo)
-            if(demoBtn.classList.contains('bg-orange-400')){
-                demoBtn.style.boxShadow = `${val}px ${val}px 0px #FFF`;
-            } else {
-                demoBtn.style.boxShadow = `${val}px ${val}px 0px #FB923C`;
-            }
-        }
-    </script>
-
-</body>
-</html>
+- **Sticky Nav:** 簡約，帶有磨損質感的 Logo。
+- **Hero Section:** 巨型分屏設計，左側為超大日文標題，右側為插畫 (由 Scroll 觸發動態視差)。
+- **Story/About:** 文字流動佈局，配合浮動的貼紙風格插圖。
+- **Blog Grid (Bento Style):** 不規則網格，每個格子像漫畫分鏡一樣。
+- **Footer:** 巨大的版權宣告與手寫風格簽名。
